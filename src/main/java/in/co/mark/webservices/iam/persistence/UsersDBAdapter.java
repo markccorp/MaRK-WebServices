@@ -27,7 +27,7 @@ public interface UsersDBAdapter {
 	 * To get a user by email from DB
 	 * 
 	 * @param id An email of a user to get its details
-	 * @return A {code User}, if found for the given {@code email}; otherwise,
+	 * @return A {@code User}, if found for the given {@code email}; otherwise,
 	 *         {@code null}
 	 */
 	public UserEObj getUserByEmail(String email);

@@ -2,8 +2,8 @@ package in.co.mark.webservices.contacts.gateway.dto;
 
 import java.util.Objects;
 
-public record CreateContactResponse(long id, String firstName, String middleName, String lastName, String avatartUri,
-		boolean isFav, long createdOn, long lastUpdatedOn) {
+public record CreateContactResponse(long id, String firstName, String middleName, String lastName, boolean isFav,
+		long createdOn, long lastUpdatedOn) {
 	/**
 	 * Initializes the properties of this class with the given parameter values.
 	 * Following parameters must have valid values:

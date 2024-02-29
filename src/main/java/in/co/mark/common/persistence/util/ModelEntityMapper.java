@@ -1,7 +1,7 @@
 package in.co.mark.common.persistence.util;
 
 /**
- * Defines a contract to map (convert) a <i>model</i> object to an equivalent
+ * Defines a contract to map or convert a <i>model</i> object to an equivalent
  * <i>entity</i> object, and vice-versa
  * 
  * @param <M> Type of the <i>model</i> object

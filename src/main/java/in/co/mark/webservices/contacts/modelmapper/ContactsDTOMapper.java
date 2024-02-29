@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import in.co.mark.webservices.contacts.domain.model.Address;
 import in.co.mark.webservices.contacts.domain.model.AddressType;
 import in.co.mark.webservices.contacts.domain.model.Contact;
+import in.co.mark.webservices.contacts.domain.model.NamePrefix;
+import in.co.mark.webservices.contacts.domain.model.NameSuffix;
 import in.co.mark.webservices.contacts.gateway.controller.ContactsAPIController;
 import in.co.mark.webservices.contacts.gateway.dto.CreateAddressRequest;
 import in.co.mark.webservices.contacts.gateway.dto.CreateAddressResponse;
@@ -12,6 +14,9 @@ import in.co.mark.webservices.contacts.gateway.dto.CreateAddressTypeRequest;
 import in.co.mark.webservices.contacts.gateway.dto.CreateAddressTypeResponse;
 import in.co.mark.webservices.contacts.gateway.dto.CreateContactRequest;
 import in.co.mark.webservices.contacts.gateway.dto.CreateContactResponse;
+import in.co.mark.webservices.contacts.gateway.dto.CreateNamePrefixRequest;
+import in.co.mark.webservices.contacts.gateway.dto.CreateNameSuffixRequest;
+import in.co.mark.webservices.contacts.gateway.dto.CreateNameSuffixResponse;
 
 /**
  * Converts request/response DTO objects of {@link ContactsAPIController} to
@@ -42,8 +47,7 @@ public class ContactsDTOMapper {
 	 */
 	public CreateContactResponse mapToCreateContactResponse(Contact contact) {
 		return new CreateContactResponse(contact.getId(), contact.getFirstName(), contact.getMiddleName(),
-				contact.getLastName(), contact.getAvatarUri(), contact.isFav(), contact.getCreatedOn(),
-				contact.getLastUpdatedOn());
+				contact.getLastName(), contact.isFav(), contact.getCreatedOn(), contact.getLastUpdatedOn());
 	}
 
 	/**
@@ -85,10 +89,7 @@ public class ContactsDTOMapper {
 	 * @return A {@link AddressType} model object
 	 */
 	public AddressType mapToAddressType(CreateAddressTypeRequest reqDto) {
-		AddressType addressType = new AddressType();
-		addressType.setType(reqDto.type());
-		addressType.setDesc(reqDto.desc());
-		return addressType;
+		return new AddressType(reqDto.type(), reqDto.desc());
 	}
 
 	/**
@@ -101,5 +102,39 @@ public class ContactsDTOMapper {
 	public CreateAddressTypeResponse mapToCreateAddressTypeResponse(AddressType addressType) {
 		return new CreateAddressTypeResponse(addressType.getId(), addressType.getType(), addressType.getDesc(),
 				addressType.getCreatedOn(), addressType.getLastUpdatedOn());
+	}
+
+	/**
+	 * To map the given {@code reqDto} to an equivalent {@link NamePrefix} model
+	 * object
+	 * 
+	 * @param reqDto A request DTO of type {@link CreateNamePrefixRequest}
+	 * @return A {@link NamePrefix} model object
+	 */
+	public NamePrefix mapToNamePrefix(CreateNamePrefixRequest reqDto) {
+		return new NamePrefix(reqDto.ownerUserId(), reqDto.namePrefix(), reqDto.desc());
+	}
+
+	/**
+	 * To map the given {@code reqDto} to an equivalent {@link NameSuffix} model
+	 * object
+	 * 
+	 * @param reqDto A request DTO of type {@link CreateNameSuffixRequest}
+	 * @return A {@link NameSuffix} model object
+	 */
+	public NameSuffix mapToNameSuffix(CreateNameSuffixRequest reqDto) {
+		return new NameSuffix(reqDto.ownerUserId(), reqDto.nameSuffix(), reqDto.desc());
+	}
+
+	/**
+	 * To map the given {@code nameSuffix} to an equivalent
+	 * {@link CreateNameSuffixResponse} DTO object
+	 * 
+	 * @param nameSuffix A model object of type {@link NameSuffix}
+	 * @return A {@link CreateNameSuffixResponse} DTO object
+	 */
+	public CreateNameSuffixResponse mapToCreateNameSuffixResponse(NameSuffix nameSuffix) {
+		return new CreateNameSuffixResponse(nameSuffix.getId(), nameSuffix.getOwnerUserId(), nameSuffix.getNameSuffix(),
+				nameSuffix.getDesc(), nameSuffix.getCreatedOn(), nameSuffix.getLastUpdatedOn());
 	}
 }

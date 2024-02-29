@@ -5,6 +5,8 @@ import in.co.mark.webservices.contacts.persistence.entities.AddressEObj;
 import in.co.mark.webservices.contacts.persistence.entities.AddressTypeEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactAddressEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactEObj;
+import in.co.mark.webservices.contacts.persistence.entities.NamePrefixEObj;
+import in.co.mark.webservices.contacts.persistence.entities.NameSuffixEObj;
 
 public interface ContactsDBAdapter {
 	/**
@@ -163,5 +165,85 @@ public interface ContactsDBAdapter {
 	 * @return A {@link RecordsPage} containing list of contact-address entities
 	 */
 	public RecordsPage<ContactAddressEObj> getContactAddresses(int pageNo, int pageSize, int sortOrder,
+			String... sortByProperties);
+
+	/**
+	 * To create a new name prefix record in DB
+	 * 
+	 * @param namePrefixEObj NamePrefix entity to create
+	 * @return The newly created name prefix entity
+	 */
+	public NamePrefixEObj createNamePrefix(NamePrefixEObj namePrefixEObj);
+
+	/**
+	 * To get a name prefix by ID from DB
+	 * 
+	 * @param id ID of a name prefix to get its details
+	 * @return A {@link NamePrefixEObj}, if found for the given {@code id};
+	 *         otherwise, {@code null}
+	 */
+	public NamePrefixEObj getNamePrefixById(long id);
+
+	/**
+	 * To get a paginated list of name prefixes from DB
+	 * 
+	 * @param pageNo   Current page number
+	 * @param pageSize Size of the records per page
+	 * @return A {@link RecordsPage} containing list of name prefix entities
+	 */
+	public RecordsPage<NamePrefixEObj> getNamePrefixes(int pageNo, int pageSize);
+
+	/**
+	 * To get a paginated and sorted list of name prefixes from DB
+	 * 
+	 * @param pageNo           Current page number
+	 * @param pageSize         Size of the records per page
+	 * @param sortOrder        Set to 0 for sorting in descending order; otherwise,
+	 *                         it sorts in ascending order
+	 * @param sortByProperties Column names to the sort the records. It must not be
+	 *                         {@code null}
+	 * @return A {@link RecordsPage} containing list of name prefix entities
+	 */
+	public RecordsPage<NamePrefixEObj> getNamePrefixes(int pageNo, int pageSize, int sortOrder,
+			String... sortByProperties);
+
+	/**
+	 * To create a new name suffix record in DB
+	 * 
+	 * @param nameSuffixEObj NameSuffix entity to create
+	 * @return The newly created name suffix entity
+	 */
+	public NameSuffixEObj createNameSuffix(NameSuffixEObj nameSuffixEObj);
+
+	/**
+	 * To get a name suffix by ID from DB
+	 * 
+	 * @param id ID of a name suffix to get its details
+	 * @return A {@link NameSuffixEObj}, if found for the given {@code id};
+	 *         otherwise, {@code null}
+	 */
+	public NameSuffixEObj getNameSuffixById(long id);
+
+	/**
+	 * To get a paginated list of name suffixes from DB
+	 * 
+	 * @param pageNo   Current page number
+	 * @param pageSize Size of the records per page
+	 * @return A {@link RecordsPage} containing list of name suffix entities
+	 */
+	public RecordsPage<NameSuffixEObj> getNameSuffixes(int pageNo, int pageSize);
+
+	/**
+	 * To get a paginated and sorted list of name suffixes from DB
+	 * 
+	 * @param pageNo           Current page number
+	 * @param pageSize         Size of the records per page
+	 * @param sortOrder        Set to 0 for sorting in descending order; otherwise,
+	 *                         it sorts in ascending order
+	 * @param sortByProperties Column names to the sort the records. It must not be
+	 *                         {@code null}
+	 * @return A {@link RecordsPage} containing list of name suffix entities
+	 */
+	public RecordsPage<NameSuffixEObj> getNameSuffixes(int pageNo, int pageSize, int sortOrder,
 			String... sortByProperties);
 }

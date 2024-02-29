@@ -15,7 +15,7 @@ public class UsersDTOMapper {
 	 * @return A {@link User} model object
 	 */
 	public User mapToUser(CreateUserRequest reqDto) {
-		return new User(reqDto.email(), reqDto.displayName(), null);
+		return new User(reqDto.username(), reqDto.firstName(), reqDto.middleName(), reqDto.lastName());
 	}
 
 	/**
@@ -26,7 +26,7 @@ public class UsersDTOMapper {
 	 * @return A {@link CreateUserResponse} DTO object
 	 */
 	public CreateUserResponse mapToCreateUserResponse(User user) {
-		return new CreateUserResponse(user.getId(), user.getEmail(), user.getDisplayName(), user.getAvatarUri(),
-				user.getCreatedOn(), user.getLastUpdatedOn());
+		return new CreateUserResponse(user.getId(), user.getEmail(), user.getFirstName(), user.getMiddleName(),
+				user.getLastName(), user.getCreatedOn(), user.getLastUpdatedOn());
 	}
 }

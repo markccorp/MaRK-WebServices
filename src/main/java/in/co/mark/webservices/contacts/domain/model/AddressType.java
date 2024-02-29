@@ -18,6 +18,17 @@ public class AddressType {
 	}
 
 	/**
+	 * Initializes {@code type} and {@code desc} properties of this instance
+	 * 
+	 * @param type Type of this address type
+	 * @param desc Description of this address type
+	 */
+	public AddressType(String type, String desc) {
+		this.type = type;
+		this.desc = desc;
+	}
+
+	/**
 	 * Constructor with all fields
 	 * 
 	 * @param id            ID of this address type
@@ -29,7 +40,6 @@ public class AddressType {
 	 *                      updated
 	 */
 	public AddressType(long id, String type, String desc, long createdOn, long lastUpdatedOn) {
-		super();
 		this.id = id;
 		this.type = type;
 		this.desc = desc;

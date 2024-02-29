@@ -29,7 +29,15 @@ public class ContactEObj {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ContactIdSequence")
 	@SequenceGenerator(name = "ContactIdSequence", sequenceName = "ContactIdSequence")
 	private long id;
+	@Getter
+	@Setter
+	@Column(name = "name_prefix_id")
+	private int namePrefixId;
 
+	@Getter
+	@Setter
+	@Column(name = "initial")
+	private String initial;
 	@Getter
 	@Setter
 	@Column(name = "first_name")
@@ -47,8 +55,67 @@ public class ContactEObj {
 
 	@Getter
 	@Setter
+	@Column(name = "nick_name")
+	private String nickName;
+
+	@Getter
+	@Setter
+	@Column(name = "name_suffix_id")
+	private int nameSuffixId;
+
+	@Getter
+	@Setter
+	@Column(name = "gender")
+	private String gender;
+
+	@Getter
+	@Setter
+	@Column(name = "dob_date")
+	private int dobDate;
+
+	@Getter
+	@Setter
+	@Column(name = "dob_month")
+	private int dobMonth;
+
+	@Getter
+	@Setter
+	@Column(name = "dob_year")
+	private int dobYear;
+
+	@Getter
+	@Setter
 	@Column(name = "avatar_uri")
 	private String avatarUri;
+
+	@Getter
+	@Setter
+	@Column(name = "marital_status_id")
+	private int maritalStatusId;
+	@Getter
+	@Setter
+	@Column(name = "marriage_date")
+	private int marriageDate;
+
+	@Getter
+	@Setter
+	@Column(name = "marriage_month")
+	private int marriageMonth;
+
+	@Getter
+	@Setter
+	@Column(name = "marriage_year")
+	private int marriageYear;
+
+	@Getter
+	@Setter
+	@Column(name = "spouse_contact_id")
+	private long spouseContactId;
+
+	@Getter
+	@Setter
+	@Column(name = "spouse_name")
+	private String spouseName;
 
 	@Getter
 	@Setter

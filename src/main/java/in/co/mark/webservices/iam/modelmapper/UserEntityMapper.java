@@ -11,13 +11,14 @@ public class UserEntityMapper implements ModelEntityMapper<User, UserEObj> {
 
 	@Override
 	public User mapToModel(UserEObj userEObj) {
-		return new User(userEObj.getId(), userEObj.getEmail(), userEObj.getDisplayName(), userEObj.getAvatarUri(),
-				userEObj.getCreatedOn(), userEObj.getLastUpdatedOn());
+		return new User(userEObj.getId(), userEObj.getEmail(), userEObj.getFirstName(), userEObj.getMiddleName(),
+				userEObj.getLastName(), userEObj.getCreatedOn(), userEObj.getLastUpdatedOn());
 	}
 
 	@Override
 	public UserEObj mapToEntity(User user) {
-		return new UserEObj(user.getId(), user.getEmail(), user.getDisplayName(), user.getAvatarUri(),
-				user.getCreatedOn(), user.getLastUpdatedOn());
+		return new UserEObj(user.getId(), user.getInitial(), user.getFirstName(), user.getMiddleName(),
+				user.getLastName(), user.getDisplayName(), user.getGender(), user.getDobDate(), user.getDobMonth(),
+				user.getDobYear(), user.getEmail(), user.getAvatarUri(), user.getCreatedOn(), user.getLastUpdatedOn());
 	}
 }

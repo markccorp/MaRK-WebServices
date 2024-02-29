@@ -6,10 +6,24 @@ public class Contact {
 	 * on successful creation of the respective record.
 	 */
 	private long id;
+	private int namePrefixId;
+	private String initial;
 	private String firstName;
 	private String middleName;
 	private String lastName;
+	private String nickName;
+	private int nameSuffixId;
+	private String gender;
+	private int dobDate;
+	private int dobMonth;
+	private int dobYear;
 	private String avatarUri;
+	private int maritalStatusId;
+	private int marriageDate;
+	private int marriageMonth;
+	private int marriageYear;
+	private long spouseContactId;
+	private String spouseName;
 	private boolean isFav;
 	private long createdOn;
 	private long lastUpdatedOn;
@@ -21,26 +35,86 @@ public class Contact {
 	}
 
 	/**
-	 * Constructor with all fields
+	 * Initializes {@code id}, {@code firstName}, {@code middleName},
+	 * {@code lastName}, {@code nickName}, {@code isFav}, {@code createdOn}, and
+	 * {@code lastUpdatedOn} properties of this class
 	 * 
 	 * @param id            ID of this contact
 	 * @param firstName     First name of this contact
 	 * @param middleName    Middle name of this contact
 	 * @param lastName      Last name of this contact
-	 * @param avatarUri     URI of the avatar of this contact
+	 * @param nickName      Nick name of this contact
 	 * @param isFav         A boolean indicating if this contact is marked as
 	 *                      favorite or not
 	 * @param createdOn     A timestamp indicating when this contact was created
 	 * @param lastUpdatedOn A timestamp indicating when this contact was last
 	 *                      updated
 	 */
-	public Contact(long id, String firstName, String middleName, String lastName, String avatarUri, boolean isFav,
+	public Contact(long id, String firstName, String middleName, String lastName, String nickName, boolean isFav,
 			long createdOn, long lastUpdatedOn) {
 		this.id = id;
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
+		this.nickName = nickName;
+		this.isFav = isFav;
+		this.createdOn = createdOn;
+		this.lastUpdatedOn = lastUpdatedOn;
+	}
+
+	/**
+	 * Constructor to initialize all properties of this class
+	 * 
+	 * @param id              ID of this contact
+	 * @param namePrefixId    ID of the name prefix to be used for this contact
+	 * @param initial         Initial of this contact
+	 * @param firstName       First name of this contact
+	 * @param middleName      Middle name of this contact
+	 * @param lastName        Last name of this contact
+	 * @param nickName        Nick name of this contact
+	 * @param nameSuffixId    ID of the name suffix to be used for this contact
+	 * @param gender          Gender of this contact. Valid values are: <b>M</b> for
+	 *                        Male, <b>F</b> for Female, and <b>O</b> for Other.
+	 * @param dobDate         The date part of the date of birth of this contact
+	 * @param dobMonth        The month part of the date of birth of this contact
+	 * @param dobYear         The year part of the date of birth of this contact
+	 * @param avatarUri       URI of the avatar of this contact
+	 * @param maritalStatusId An ID indicating the marital status of this contact
+	 * @param marriageDate    The date part of the marriage date of this contact
+	 * @param marriageMonth   The month part of the marriage date of this contact
+	 * @param marriageYear    The year part of the marriage date of this contact
+	 * @param spouseContactId ID of a contact who is spouse of this contact. It can
+	 *                        be {@code null} if no such contact is available.
+	 * @param spouseName      Name of the spouse of this contact
+	 * @param isFav           A boolean indicating if this contact is marked as
+	 *                        favorite or not
+	 * @param createdOn       A timestamp indicating when this contact was created
+	 * @param lastUpdatedOn   A timestamp indicating when this contact was last
+	 *                        updated
+	 */
+	public Contact(long id, int namePrefixId, String initial, String firstName, String middleName, String lastName,
+			String nickName, int nameSuffixId, String gender, int dobDate, int dobMonth, int dobYear, String avatarUri,
+			int maritalStatusId, int marriageDate, int marriageMonth, int marriageYear, long spouseContactId,
+			String spouseName, boolean isFav, long createdOn, long lastUpdatedOn) {
+		this.id = id;
+		this.namePrefixId = namePrefixId;
+		this.initial = initial;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.nickName = nickName;
+		this.nameSuffixId = nameSuffixId;
+		this.gender = gender;
+		this.dobDate = dobDate;
+		this.dobMonth = dobMonth;
+		this.dobYear = dobYear;
 		this.avatarUri = avatarUri;
+		this.maritalStatusId = maritalStatusId;
+		this.marriageDate = marriageDate;
+		this.marriageMonth = marriageMonth;
+		this.marriageYear = marriageYear;
+		this.spouseContactId = spouseContactId;
+		this.spouseName = spouseName;
 		this.isFav = isFav;
 		this.createdOn = createdOn;
 		this.lastUpdatedOn = lastUpdatedOn;
@@ -66,6 +140,42 @@ public class Contact {
 	 */
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	/**
+	 * To get the name prefix ID, if any, used for this contact
+	 * 
+	 * @return {@code namePrefixId} of this contact
+	 */
+	public int getNamePrefixId() {
+		return namePrefixId;
+	}
+
+	/**
+	 * To set the name prefix ID of this contact
+	 * 
+	 * @param namePrefixId ID of the name prefix to be used for this contact
+	 */
+	public void setNamePrefixId(int namePrefixId) {
+		this.namePrefixId = namePrefixId;
+	}
+
+	/**
+	 * To get the initial of this contact
+	 * 
+	 * @return {@code initial} of this contact
+	 */
+	public String getInitial() {
+		return initial;
+	}
+
+	/**
+	 * To set the initial of this contact
+	 * 
+	 * @param initial Initial of this contact
+	 */
+	public void setInitial(String initial) {
+		this.initial = initial;
 	}
 
 	/**
@@ -123,6 +233,118 @@ public class Contact {
 	}
 
 	/**
+	 * To get the nick name of this contact
+	 * 
+	 * @return {@code nickName} of this contact
+	 */
+	public String getNickName() {
+		return nickName;
+	}
+
+	/**
+	 * To set the nick name of this contact
+	 * 
+	 * @param nickName Nick name of this contact
+	 */
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	/**
+	 * To get the name suffix ID, if any, used for this contact
+	 * 
+	 * @return {@code nameSuffixId} of this contact
+	 */
+	public int getNameSuffixId() {
+		return nameSuffixId;
+	}
+
+	/**
+	 * To set the name suffix ID of this contact
+	 * 
+	 * @param nameSuffixId ID of the name suffix to be used for this contact
+	 */
+	public void setNameSuffixId(int nameSuffixId) {
+		this.nameSuffixId = nameSuffixId;
+	}
+
+	/**
+	 * To get gender of this contact. Possible values are: <b>M</b> for Male,
+	 * <b>F</b> for Female, and <b>O</b> for Other
+	 * 
+	 * @return {@code gender} of this contact
+	 */
+	public String getGender() {
+		return gender;
+	}
+
+	/**
+	 * To set gender of this contact. Possible values are: <b>M</b> for Male,
+	 * <b>F</b> for Female, and <b>O</b> for Other
+	 * 
+	 * @param gender Gender of this contact
+	 * 
+	 */
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	/**
+	 * To get the date part of the date of birth of this contact
+	 * 
+	 * @return {@code dobDate} - the date part of the date of birth of this contact
+	 */
+	public int getDobDate() {
+		return dobDate;
+	}
+
+	/**
+	 * To set the date part of the date of birth of this contact
+	 * 
+	 * @param dobDate The date part of the date of birth of this contact
+	 */
+	public void setDobDate(int dobDate) {
+		this.dobDate = dobDate;
+	}
+
+	/**
+	 * To get the month part of the date of birth of this contact
+	 * 
+	 * @return {@code dobMonth} - the month part of the date of birth of this
+	 *         contact
+	 */
+	public int getDobMonth() {
+		return dobMonth;
+	}
+
+	/**
+	 * To set the month part of the date of birth of this contact
+	 * 
+	 * @param dobMonth The month part of the date of birth of this contact
+	 */
+	public void setDobMonth(int dobMonth) {
+		this.dobMonth = dobMonth;
+	}
+
+	/**
+	 * To get the year part of the date of birth of this contact
+	 * 
+	 * @return {@code dobYear} - the year part of the date of birth of this contact
+	 */
+	public int getDobYear() {
+		return dobYear;
+	}
+
+	/**
+	 * To set the year part of the date of birth of this contact
+	 * 
+	 * @param dobYear The year part of the date of birth of this contact
+	 */
+	public void setDobYear(int dobYear) {
+		this.dobYear = dobYear;
+	}
+
+	/**
 	 * To get the URI of the avatar of this contact
 	 * 
 	 * @return {@code avatarUri} of this contact
@@ -138,6 +360,123 @@ public class Contact {
 	 */
 	public void setAvatarUri(String avatarUri) {
 		this.avatarUri = avatarUri;
+	}
+
+	/**
+	 * To get the ID indicating the marital status of this contact
+	 * 
+	 * @return {@code maritalStatusId} indicating the marital status of this contact
+	 */
+	public int getMaritalStatusId() {
+		return maritalStatusId;
+	}
+
+	/**
+	 * To set the ID indicating the marital status of this contact
+	 * 
+	 * @param maritalStatusId An ID indicating the marital status of this contact
+	 */
+	public void setMaritalStatusId(int maritalStatusId) {
+		this.maritalStatusId = maritalStatusId;
+	}
+
+	/**
+	 * To get the date part of the marriage date of this contact
+	 * 
+	 * @return {@code marriageDate} - the date part of the marriage date of this
+	 *         contact
+	 */
+	public int getMarriageDate() {
+		return marriageDate;
+	}
+
+	/**
+	 * To set the date part of the marriage date of this contact
+	 * 
+	 * @param dobDate The date part of the marriage date of this contact
+	 */
+	public void setMarriageDate(int marriageDate) {
+		this.marriageDate = marriageDate;
+	}
+
+	/**
+	 * To get the month part of the marriage date of this contact
+	 * 
+	 * @return {@code marriageMonth} - the month part of the marriage date of this
+	 *         contact
+	 */
+	public int getMarriageMonth() {
+		return marriageMonth;
+	}
+
+	/**
+	 * To set the month part of the marriage date of this contact
+	 * 
+	 * @param dobMonth The month part of the marriage date of this contact
+	 */
+	public void setMarriageMonth(int marriageMonth) {
+		this.marriageMonth = marriageMonth;
+	}
+
+	/**
+	 * To get the year part of the marriage date of this contact
+	 * 
+	 * @return {@code marriageYear} - the year part of the marriage date of this
+	 *         contact
+	 */
+	public int getMarriageYear() {
+		return marriageYear;
+	}
+
+	/**
+	 * To set the year part of the marriage date of this contact
+	 * 
+	 * @param dobYear The year part of the marriage date of this contact
+	 */
+	public void setMarriageYear(int marriageYear) {
+		this.marriageYear = marriageYear;
+	}
+
+	/**
+	 * To get the ID of a contact who is, if any, spouse of this contact. If a
+	 * contact is not mapped as spouse then it will be {@code null}.
+	 * 
+	 * @return ID of a contact who is spouse of this contact
+	 */
+	public long getSpouseContactId() {
+		return spouseContactId;
+	}
+
+	/**
+	 * To set the ID of a contact who is spouse of this contact. It can be
+	 * {@code null}.
+	 * 
+	 * @param spouseContactId ID of a contact who is spouse of this contact
+	 */
+	public void setSpouseContactId(long spouseContactId) {
+		this.spouseContactId = spouseContactId;
+	}
+
+	/**
+	 * To get the name of the spouse of this contact. When a valid
+	 * {@link spouseContactId} is available then it's recommended to use that to get
+	 * the spouse details
+	 * 
+	 * @return {@code spouseName} of this contact
+	 */
+	public String getSpouseName() {
+		return spouseName;
+	}
+
+	/**
+	 * To set the name of the spouse of this contact. When a valid
+	 * {@link spouseContactId} is available then it's recommended to use that to get
+	 * the spouse details.
+	 * 
+	 * @param spouseName Name of the spouse of this contact
+	 */
+	public void setSpouseName(String spouseName) {
+		this.spouseName = spouseName;
 	}
 
 	/**

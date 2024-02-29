@@ -4,12 +4,9 @@ import java.time.Instant;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
-import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,19 +23,69 @@ public class UserEObj {
 	@Getter
 	@Setter
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "UserIdSequence")
-	@SequenceGenerator(name = "UserIdSequence", sequenceName = "UserIdSequence")
 	private long id;
+
+	@Getter
+	@Setter
+	@Column(name = "initial")
+	private String initial;
+
+	@Getter
+	@Setter
+	@Column(name = "first_name")
+	private String firstName;
+
+	@Getter
+	@Setter
+	@Column(name = "middle_name")
+	private String middleName;
+
+	@Getter
+	@Setter
+	@Column(name = "last_name")
+	private String lastName;
+	@Getter
+	@Setter
+	@Column(name = "display_name")
+	private String displayName;
+
+	/**
+	 * Possible values of gender are: <b>M</b> - Male, <b>F</b> - Female, and
+	 * <b>O</b> - Other.
+	 */
+	@Getter
+	@Setter
+	@Column(name = "gender", nullable = true)
+	private String gender;
+
+	/**
+	 * Date part of the date of birth of this user
+	 */
+	@Getter
+	@Setter
+	@Column(name = "dob_date")
+	private int dobDate;
+
+	/**
+	 * Month part of the date of birth of this user
+	 */
+	@Getter
+	@Setter
+	@Column(name = "dob_month")
+	private int dobMonth;
+
+	/**
+	 * Year part of the date of birth of this user
+	 */
+	@Getter
+	@Setter
+	@Column(name = "dob_year")
+	private int dobYear;
 
 	@Getter
 	@Setter
 	@Column(name = "email", nullable = false)
 	private String email;
-
-	@Getter
-	@Setter
-	@Column(name = "display_name")
-	private String displayName;
 
 	@Getter
 	@Setter
