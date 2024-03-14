@@ -40,7 +40,7 @@ public class NamePrefixesAPIController {
 	public NamePrefix getNamePrefixById(@PathVariable long id) {
 		NamePrefix namePrefix = namePrefixesService.getNamePrefixById(id);
 		if (namePrefix == null) {
-			logger.info("No name-prefix found with ID: {0}", id);
+			logger.info("No name prefix found with ID: {0}", id);
 		}
 		return namePrefix;
 	}

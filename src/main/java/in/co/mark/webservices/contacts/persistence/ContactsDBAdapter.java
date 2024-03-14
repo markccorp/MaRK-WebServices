@@ -7,6 +7,7 @@ import in.co.mark.webservices.contacts.persistence.entities.ContactAddressEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactEmailEObj;
 import in.co.mark.webservices.contacts.persistence.entities.EmailTypeEObj;
+import in.co.mark.webservices.contacts.persistence.entities.MaritalStatusEObj;
 import in.co.mark.webservices.contacts.persistence.entities.NamePrefixEObj;
 import in.co.mark.webservices.contacts.persistence.entities.NameSuffixEObj;
 
@@ -327,5 +328,45 @@ public interface ContactsDBAdapter {
 	 * @return A {@link RecordsPage} containing list of contact email entities
 	 */
 	public RecordsPage<ContactEmailEObj> getContactEmails(int pageNo, int pageSize, int sortOrder,
+			String... sortByProperties);
+
+	/**
+	 * To create a new marital status record in DB
+	 * 
+	 * @param maritalStatusEObj MaritalStatus entity to create
+	 * @return The newly created marital status entity
+	 */
+	public MaritalStatusEObj createMaritalStatus(MaritalStatusEObj maritalStatusEObj);
+
+	/**
+	 * To get a marital status by ID from DB
+	 * 
+	 * @param id ID of a Marital status to get its details
+	 * @return A {@link MaritalStatusEObj}, if found for the given {@code id};
+	 *         otherwise, {@code null}
+	 */
+	public MaritalStatusEObj getMaritalStatusById(long id);
+
+	/**
+	 * To get a paginated list of marital statuses from DB
+	 * 
+	 * @param pageNo   Current page number
+	 * @param pageSize Size of the records per page
+	 * @return A {@link RecordsPage} containing list of marital status entities
+	 */
+	public RecordsPage<MaritalStatusEObj> getMaritalStatuses(int pageNo, int pageSize);
+
+	/**
+	 * To get a paginated and sorted list of marital statuses from DB
+	 * 
+	 * @param pageNo           Current page number
+	 * @param pageSize         Size of the records per page
+	 * @param sortOrder        Set to 0 for sorting in descending order; otherwise,
+	 *                         it sorts in ascending order
+	 * @param sortByProperties Column names to the sort the records. It must not be
+	 *                         {@code null}
+	 * @return A {@link RecordsPage} containing list of marital status entities
+	 */
+	public RecordsPage<MaritalStatusEObj> getMaritalStatuses(int pageNo, int pageSize, int sortOrder,
 			String... sortByProperties);
 }

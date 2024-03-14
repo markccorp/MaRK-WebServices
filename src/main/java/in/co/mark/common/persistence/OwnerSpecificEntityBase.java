@@ -22,22 +22,22 @@ import lombok.Setter;
  * @author Rakesh Kumar
  */
 @MappedSuperclass
-public abstract class OwnerEntityBase extends EntityBase {
+public abstract class OwnerSpecificEntityBase extends EntityBase {
 	@Getter
 	@Setter
 	@Column(name = "owner_id", nullable = false)
 	protected long ownerId;
 
-	protected OwnerEntityBase() {
+	protected OwnerSpecificEntityBase() {
 
 	}
 
 	/**
-	 * Initializes {@code ownerUserId} property of this instance
+	 * Initializes {@code ownerId} property of this instance
 	 * 
 	 * @param ownerId ID of the owner - can be a user or an organization
 	 */
-	protected OwnerEntityBase(long ownerId) {
+	protected OwnerSpecificEntityBase(long ownerId) {
 		this.ownerId = ownerId;
 	}
 
@@ -50,7 +50,7 @@ public abstract class OwnerEntityBase extends EntityBase {
 	 * @param lastUpdatedOn A timestamp indicating when the respective DB record was
 	 *                      last updated
 	 */
-	protected OwnerEntityBase(long ownerId, long createdOn, long lastUpdatedOn) {
+	protected OwnerSpecificEntityBase(long ownerId, long createdOn, long lastUpdatedOn) {
 		super(createdOn, lastUpdatedOn);
 		this.ownerId = ownerId;
 	}

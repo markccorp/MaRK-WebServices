@@ -7,7 +7,7 @@ package in.co.mark.common.domain.model;
  * 
  * @author Rakesh Kumar
  */
-public class ModelBase {
+public abstract class ModelBase {
 	protected long createdOn;
 	protected long lastUpdatedOn;
 

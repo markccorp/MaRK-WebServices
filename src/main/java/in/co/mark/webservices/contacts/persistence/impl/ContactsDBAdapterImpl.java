@@ -17,6 +17,7 @@ import in.co.mark.webservices.contacts.persistence.entities.ContactAddressEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactEmailEObj;
 import in.co.mark.webservices.contacts.persistence.entities.EmailTypeEObj;
+import in.co.mark.webservices.contacts.persistence.entities.MaritalStatusEObj;
 import in.co.mark.webservices.contacts.persistence.entities.NamePrefixEObj;
 import in.co.mark.webservices.contacts.persistence.entities.NameSuffixEObj;
 import in.co.mark.webservices.contacts.persistence.repositories.AddressTypesRepository;
@@ -25,6 +26,7 @@ import in.co.mark.webservices.contacts.persistence.repositories.ContactAddresses
 import in.co.mark.webservices.contacts.persistence.repositories.ContactEmailsRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.ContactsRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.EmailTypesRepository;
+import in.co.mark.webservices.contacts.persistence.repositories.MaritalStatusesRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.NamePrefixesRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.NameSuffixesRepository;
 
@@ -38,11 +40,13 @@ public class ContactsDBAdapterImpl implements ContactsDBAdapter {
 	private final NameSuffixesRepository nameSuffixesRepo;
 	private final EmailTypesRepository emailTypesRepo;
 	private final ContactEmailsRepository contactEmailsRepo;
+	private final MaritalStatusesRepository maritalStatusesRepo;
 
 	public ContactsDBAdapterImpl(ContactsRepository contactsRepo, AddressesRepository addressesRepo,
 			AddressTypesRepository addressTypesRepo, ContactAddressesRepository contactAddressesRepo,
 			NamePrefixesRepository namePrefixesRepo, NameSuffixesRepository nameSuffixesRepo,
-			EmailTypesRepository emailTypesRepo, ContactEmailsRepository contactEmailsRepo) {
+			EmailTypesRepository emailTypesRepo, ContactEmailsRepository contactEmailsRepo,
+			MaritalStatusesRepository maritalStatusesRepo) {
 		this.contactsRepo = contactsRepo;
 		this.addressesRepo = addressesRepo;
 		this.addressTypesRepo = addressTypesRepo;
@@ -51,6 +55,7 @@ public class ContactsDBAdapterImpl implements ContactsDBAdapter {
 		this.nameSuffixesRepo = nameSuffixesRepo;
 		this.emailTypesRepo = emailTypesRepo;
 		this.contactEmailsRepo = contactEmailsRepo;
+		this.maritalStatusesRepo = maritalStatusesRepo;
 	}
 
 	@Override
@@ -280,6 +285,35 @@ public class ContactsDBAdapterImpl implements ContactsDBAdapter {
 		Pageable paging = PageRequest.of(pageNo, pageSize, sortDirection, sortByProperties);
 		Slice<ContactEmailEObj> slicedResult = contactEmailsRepo.findAll(paging);
 		return new RecordsPageImpl<ContactEmailEObj>(slicedResult.getContent(), slicedResult.getNumber(),
+				slicedResult.getSize(), slicedResult.hasNext());
+	}
+
+	@Override
+	public MaritalStatusEObj createMaritalStatus(MaritalStatusEObj maritalStatusEObj) {
+		return maritalStatusesRepo.save(maritalStatusEObj);
+	}
+
+	@Override
+	public MaritalStatusEObj getMaritalStatusById(long id) {
+		Optional<MaritalStatusEObj> optionalMaritalStatusEObj = maritalStatusesRepo.findById(id);
+		return optionalMaritalStatusEObj.orElse(null);
+	}
+
+	@Override
+	public RecordsPage<MaritalStatusEObj> getMaritalStatuses(int pageNo, int pageSize) {
+		Pageable paging = PageRequest.of(pageNo, pageSize);
+		Slice<MaritalStatusEObj> slicedResult = maritalStatusesRepo.findAll(paging);
+		return new RecordsPageImpl<MaritalStatusEObj>(slicedResult.getContent(), slicedResult.getNumber(),
+				slicedResult.getSize(), slicedResult.hasNext());
+	}
+
+	@Override
+	public RecordsPage<MaritalStatusEObj> getMaritalStatuses(int pageNo, int pageSize, int sortOrder,
+			String... sortByProperties) {
+		Direction sortDirection = sortOrder != 0 ? Direction.ASC : Direction.DESC;
+		Pageable paging = PageRequest.of(pageNo, pageSize, sortDirection, sortByProperties);
+		Slice<MaritalStatusEObj> slicedResult = maritalStatusesRepo.findAll(paging);
+		return new RecordsPageImpl<MaritalStatusEObj>(slicedResult.getContent(), slicedResult.getNumber(),
 				slicedResult.getSize(), slicedResult.hasNext());
 	}
 }

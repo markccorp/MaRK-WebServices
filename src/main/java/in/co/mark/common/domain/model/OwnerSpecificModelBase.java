@@ -15,19 +15,22 @@ package in.co.mark.common.domain.model;
  * 
  * @author Rakesh Kumar
  */
-public class OwnerModelBase extends ModelBase {
+public abstract class OwnerSpecificModelBase extends ModelBase {
 	protected long ownerId;
 
-	public OwnerModelBase() {
+	/**
+	 * Default constructor
+	 */
+	public OwnerSpecificModelBase() {
 
 	}
 
 	/**
-	 * Initializes {@code ownerUserId} property of this instance
+	 * Initializes {@code ownerId} property of this instance
 	 * 
 	 * @param ownerId ID of the owner - can be a user or an organization
 	 */
-	protected OwnerModelBase(long ownerId) {
+	protected OwnerSpecificModelBase(long ownerId) {
 		this.ownerId = ownerId;
 	}
 
@@ -40,7 +43,7 @@ public class OwnerModelBase extends ModelBase {
 	 * @param lastUpdatedOn A timestamp indicating when the respective DB record was
 	 *                      last updated
 	 */
-	protected OwnerModelBase(long ownerId, long createdOn, long lastUpdatedOn) {
+	protected OwnerSpecificModelBase(long ownerId, long createdOn, long lastUpdatedOn) {
 		super(createdOn, lastUpdatedOn);
 		this.ownerId = ownerId;
 	}
