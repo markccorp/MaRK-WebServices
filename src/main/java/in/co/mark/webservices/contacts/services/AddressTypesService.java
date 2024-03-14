@@ -2,17 +2,15 @@ package in.co.mark.webservices.contacts.services;
 
 import in.co.mark.common.persistence.RecordsPage;
 import in.co.mark.webservices.contacts.domain.model.AddressType;
-import in.co.mark.webservices.contacts.gateway.dto.CreateAddressTypeRequest;
-import in.co.mark.webservices.contacts.gateway.dto.CreateAddressTypeResponse;
 
 public interface AddressTypesService {
 	/**
 	 * To create a new address type
 	 * 
-	 * @param reqDto Request DTO for creating a new address type
-	 * @return Response DTO on successful creation of the address type
+	 * @param reqObj Request object for creating a new address type
+	 * @return Newly created address type
 	 */
-	public CreateAddressTypeResponse createAddressType(CreateAddressTypeRequest reqDto);
+	public AddressType createAddressType(AddressType reqObj);
 
 	/**
 	 * To get an address type by ID

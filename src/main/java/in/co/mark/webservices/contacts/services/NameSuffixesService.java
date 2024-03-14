@@ -2,17 +2,15 @@ package in.co.mark.webservices.contacts.services;
 
 import in.co.mark.common.persistence.RecordsPage;
 import in.co.mark.webservices.contacts.domain.model.NameSuffix;
-import in.co.mark.webservices.contacts.gateway.dto.CreateNameSuffixRequest;
-import in.co.mark.webservices.contacts.gateway.dto.CreateNameSuffixResponse;
 
 public interface NameSuffixesService {
 	/**
 	 * To create a new name suffix
 	 * 
-	 * @param reqDto Request DTO for creating a new name suffix
-	 * @return Response DTO on successful creation of the name suffix
+	 * @param reqObj Request object for creating a new name suffix
+	 * @return Newly created name suffix
 	 */
-	public CreateNameSuffixResponse createNameSuffix(CreateNameSuffixRequest reqDto);
+	public NameSuffix createNameSuffix(NameSuffix reqObj);
 
 	/**
 	 * To get a name suffix by ID
@@ -21,7 +19,7 @@ public interface NameSuffixesService {
 	 * @return A {@link NameSuffix}, if found for the given {@code id}; otherwise,
 	 *         {@code null}
 	 */
-	public NameSuffix getNameSuffixById(int id);
+	public NameSuffix getNameSuffixById(long id);
 
 	/**
 	 * To get a paginated list of name suffixes

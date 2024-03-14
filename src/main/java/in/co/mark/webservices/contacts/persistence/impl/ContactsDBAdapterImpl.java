@@ -15,12 +15,16 @@ import in.co.mark.webservices.contacts.persistence.entities.AddressEObj;
 import in.co.mark.webservices.contacts.persistence.entities.AddressTypeEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactAddressEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactEObj;
+import in.co.mark.webservices.contacts.persistence.entities.ContactEmailEObj;
+import in.co.mark.webservices.contacts.persistence.entities.EmailTypeEObj;
 import in.co.mark.webservices.contacts.persistence.entities.NamePrefixEObj;
 import in.co.mark.webservices.contacts.persistence.entities.NameSuffixEObj;
 import in.co.mark.webservices.contacts.persistence.repositories.AddressTypesRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.AddressesRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.ContactAddressesRepository;
+import in.co.mark.webservices.contacts.persistence.repositories.ContactEmailsRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.ContactsRepository;
+import in.co.mark.webservices.contacts.persistence.repositories.EmailTypesRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.NamePrefixesRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.NameSuffixesRepository;
 
@@ -32,16 +36,21 @@ public class ContactsDBAdapterImpl implements ContactsDBAdapter {
 	private final ContactAddressesRepository contactAddressesRepo;
 	private final NamePrefixesRepository namePrefixesRepo;
 	private final NameSuffixesRepository nameSuffixesRepo;
+	private final EmailTypesRepository emailTypesRepo;
+	private final ContactEmailsRepository contactEmailsRepo;
 
 	public ContactsDBAdapterImpl(ContactsRepository contactsRepo, AddressesRepository addressesRepo,
 			AddressTypesRepository addressTypesRepo, ContactAddressesRepository contactAddressesRepo,
-			NamePrefixesRepository namePrefixesRepo, NameSuffixesRepository nameSuffixesRepo) {
+			NamePrefixesRepository namePrefixesRepo, NameSuffixesRepository nameSuffixesRepo,
+			EmailTypesRepository emailTypesRepo, ContactEmailsRepository contactEmailsRepo) {
 		this.contactsRepo = contactsRepo;
 		this.addressesRepo = addressesRepo;
 		this.addressTypesRepo = addressTypesRepo;
 		this.contactAddressesRepo = contactAddressesRepo;
 		this.namePrefixesRepo = namePrefixesRepo;
 		this.nameSuffixesRepo = nameSuffixesRepo;
+		this.emailTypesRepo = emailTypesRepo;
+		this.contactEmailsRepo = contactEmailsRepo;
 	}
 
 	@Override
@@ -213,6 +222,64 @@ public class ContactsDBAdapterImpl implements ContactsDBAdapter {
 		Pageable paging = PageRequest.of(pageNo, pageSize, sortDirection, sortByProperties);
 		Slice<NameSuffixEObj> slicedResult = nameSuffixesRepo.findAll(paging);
 		return new RecordsPageImpl<NameSuffixEObj>(slicedResult.getContent(), slicedResult.getNumber(),
+				slicedResult.getSize(), slicedResult.hasNext());
+	}
+
+	@Override
+	public EmailTypeEObj createEmailType(EmailTypeEObj emailTypeEObj) {
+		return emailTypesRepo.save(emailTypeEObj);
+	}
+
+	@Override
+	public EmailTypeEObj getEmailTypeById(long id) {
+		Optional<EmailTypeEObj> optionalEmailTypeEObj = emailTypesRepo.findById(id);
+		return optionalEmailTypeEObj.orElse(null);
+	}
+
+	@Override
+	public RecordsPage<EmailTypeEObj> getEmailTypes(int pageNo, int pageSize) {
+		Pageable paging = PageRequest.of(pageNo, pageSize);
+		Slice<EmailTypeEObj> slicedResult = emailTypesRepo.findAll(paging);
+		return new RecordsPageImpl<EmailTypeEObj>(slicedResult.getContent(), slicedResult.getNumber(),
+				slicedResult.getSize(), slicedResult.hasNext());
+	}
+
+	@Override
+	public RecordsPage<EmailTypeEObj> getEmailTypes(int pageNo, int pageSize, int sortOrder,
+			String... sortByProperties) {
+		Direction sortDirection = sortOrder != 0 ? Direction.ASC : Direction.DESC;
+		Pageable paging = PageRequest.of(pageNo, pageSize, sortDirection, sortByProperties);
+		Slice<EmailTypeEObj> slicedResult = emailTypesRepo.findAll(paging);
+		return new RecordsPageImpl<EmailTypeEObj>(slicedResult.getContent(), slicedResult.getNumber(),
+				slicedResult.getSize(), slicedResult.hasNext());
+	}
+
+	@Override
+	public ContactEmailEObj createContactEmail(ContactEmailEObj contactEmailEObj) {
+		return contactEmailsRepo.save(contactEmailEObj);
+	}
+
+	@Override
+	public ContactEmailEObj getContactEmailById(long id) {
+		Optional<ContactEmailEObj> optionalContactEmailEObj = contactEmailsRepo.findById(id);
+		return optionalContactEmailEObj.orElse(null);
+	}
+
+	@Override
+	public RecordsPage<ContactEmailEObj> getContactEmails(int pageNo, int pageSize) {
+		Pageable paging = PageRequest.of(pageNo, pageSize);
+		Slice<ContactEmailEObj> slicedResult = contactEmailsRepo.findAll(paging);
+		return new RecordsPageImpl<ContactEmailEObj>(slicedResult.getContent(), slicedResult.getNumber(),
+				slicedResult.getSize(), slicedResult.hasNext());
+	}
+
+	@Override
+	public RecordsPage<ContactEmailEObj> getContactEmails(int pageNo, int pageSize, int sortOrder,
+			String... sortByProperties) {
+		Direction sortDirection = sortOrder != 0 ? Direction.ASC : Direction.DESC;
+		Pageable paging = PageRequest.of(pageNo, pageSize, sortDirection, sortByProperties);
+		Slice<ContactEmailEObj> slicedResult = contactEmailsRepo.findAll(paging);
+		return new RecordsPageImpl<ContactEmailEObj>(slicedResult.getContent(), slicedResult.getNumber(),
 				slicedResult.getSize(), slicedResult.hasNext());
 	}
 }

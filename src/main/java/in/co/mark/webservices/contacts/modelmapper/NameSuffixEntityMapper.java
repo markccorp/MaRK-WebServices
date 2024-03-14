@@ -14,14 +14,15 @@ public class NameSuffixEntityMapper implements ModelEntityMapper<NameSuffix, Nam
 
 	@Override
 	public NameSuffix mapToModel(NameSuffixEObj entity) {
-		NameSuffix model = new NameSuffix(entity.getId(), entity.getOwnerUserId(), entity.getNameSuffix(),
-				entity.getDesc(), entity.getCreatedOn(), entity.getLastUpdatedOn());
+		NameSuffix model = new NameSuffix(entity.getId(), entity.getOwnerId(), entity.isOwnerOrg(),
+				entity.getNameSuffix(), entity.getDesc(), entity.getCreatedOn(), entity.getLastUpdatedOn());
 		return model;
 	}
 
 	@Override
 	public NameSuffixEObj mapToEntity(NameSuffix model) {
-		NameSuffixEObj entity = new NameSuffixEObj(model.getId(), model.getNameSuffix(), model.getDesc());
+		NameSuffixEObj entity = new NameSuffixEObj(model.getId(), model.isOwnerOrg(), model.getNameSuffix(),
+				model.getDesc());
 		entity.updateUserIdAndTimestamp(model);
 		return entity;
 	}

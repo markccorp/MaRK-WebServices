@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import in.co.mark.common.persistence.RecordsPage;
 import in.co.mark.webservices.contacts.domain.model.AddressType;
-import in.co.mark.webservices.contacts.gateway.dto.CreateAddressTypeRequest;
-import in.co.mark.webservices.contacts.gateway.dto.CreateAddressTypeResponse;
 import in.co.mark.webservices.contacts.services.AddressTypesService;
 
 @RestController
@@ -31,9 +29,10 @@ public class AddressTypesAPIController {
 
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public CreateAddressTypeResponse createAddressType(@RequestBody CreateAddressTypeRequest request) {
-		CreateAddressTypeResponse response = addressTypesService.createAddressType(request);
-		logger.info("Address-type created successfully with ID: {0}", response.id());
+	public AddressType createAddressType(@RequestBody AddressType request) {
+		AddressType response = addressTypesService.createAddressType(request);
+		logger.info("Address type created successfully with ID: {0} for owner: {1}", response.getId(),
+				response.getOwnerId());
 		return response;
 	}
 

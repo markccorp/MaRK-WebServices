@@ -29,6 +29,7 @@ public class ContactEObj {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ContactIdSequence")
 	@SequenceGenerator(name = "ContactIdSequence", sequenceName = "ContactIdSequence")
 	private long id;
+
 	@Getter
 	@Setter
 	@Column(name = "name_prefix_id")

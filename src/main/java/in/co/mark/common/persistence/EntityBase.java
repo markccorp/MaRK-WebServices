@@ -10,20 +10,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * An entity base class with the following properties and their respective
- * getter/setter methods:
- * <ul>
- * <li>{@code createdOn} - DB column name <i>created_on</i></li>
- * <li>{@code lastUpdatedOn} - DB column name <i>last_updated_on</i></li>
- * </ul>
+ * A base entity class with properties and the respective getter/setter methods
+ * to store <i>created</i> and <i>last updated</i> time of the entity.
+ * <p>
  * Note that this is just a <i>mapped superclass</i>, and not an actual entity.
- * The actual entity classes can extend it to avoid defining the common
- * properties/methods.
+ * By extending it one can just avoid redefining the common properties/methods.
+ * </P>
  * 
  * @author Rakesh Kumar
  */
 @MappedSuperclass
-public class EntityTimestamp {
+public abstract class EntityBase {
 	@Getter
 	@Setter
 	@Column(name = "created_on", nullable = false)
@@ -37,7 +34,7 @@ public class EntityTimestamp {
 	/**
 	 * Default constructor
 	 */
-	public EntityTimestamp() {
+	public EntityBase() {
 
 	}
 
@@ -49,7 +46,7 @@ public class EntityTimestamp {
 	 * @param lastUpdatedOn A timestamp indicating when the respective DB record was
 	 *                      last updated
 	 */
-	protected EntityTimestamp(long createdOn, long lastUpdatedOn) {
+	protected EntityBase(long createdOn, long lastUpdatedOn) {
 		this.createdOn = createdOn;
 		this.lastUpdatedOn = lastUpdatedOn;
 	}

@@ -5,10 +5,7 @@ import org.springframework.stereotype.Service;
 import in.co.mark.common.persistence.RecordsPage;
 import in.co.mark.common.persistence.util.ModelEntityRecordsPageMapper;
 import in.co.mark.webservices.contacts.domain.model.AddressType;
-import in.co.mark.webservices.contacts.gateway.dto.CreateAddressTypeRequest;
-import in.co.mark.webservices.contacts.gateway.dto.CreateAddressTypeResponse;
 import in.co.mark.webservices.contacts.modelmapper.AddressTypeEntityMapper;
-import in.co.mark.webservices.contacts.modelmapper.ContactsDTOMapper;
 import in.co.mark.webservices.contacts.persistence.ContactsDBAdapter;
 import in.co.mark.webservices.contacts.persistence.entities.AddressTypeEObj;
 import in.co.mark.webservices.contacts.services.AddressTypesService;
@@ -16,22 +13,18 @@ import in.co.mark.webservices.contacts.services.AddressTypesService;
 @Service
 public class AddressTypesServiceImpl implements AddressTypesService {
 	private final ContactsDBAdapter dbAdapter;
-	private final ContactsDTOMapper modelDTOMapper;
 	private final AddressTypeEntityMapper modelEntityMapper;
 
-	public AddressTypesServiceImpl(ContactsDBAdapter dbAdapter, ContactsDTOMapper modelDTOMapper,
-			AddressTypeEntityMapper modelEntityMapper) {
+	public AddressTypesServiceImpl(ContactsDBAdapter dbAdapter, AddressTypeEntityMapper modelEntityMapper) {
 		this.dbAdapter = dbAdapter;
-		this.modelDTOMapper = modelDTOMapper;
 		this.modelEntityMapper = modelEntityMapper;
 	}
 
 	@Override
-	public CreateAddressTypeResponse createAddressType(CreateAddressTypeRequest reqDto) {
-		AddressType addressType = modelDTOMapper.mapToAddressType(reqDto);
-		AddressTypeEObj addressTypeEObj = modelEntityMapper.mapToEntity(addressType);
-		addressType = modelEntityMapper.mapToModel(dbAdapter.createAddressType(addressTypeEObj));
-		return modelDTOMapper.mapToCreateAddressTypeResponse(addressType);
+	public AddressType createAddressType(AddressType reqObj) {
+		AddressTypeEObj addressTypeEObj = modelEntityMapper.mapToEntity(reqObj);
+		AddressType addressType = modelEntityMapper.mapToModel(dbAdapter.createAddressType(addressTypeEObj));
+		return addressType;
 	}
 
 	@Override

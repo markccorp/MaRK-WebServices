@@ -1,9 +1,9 @@
 package in.co.mark.common.extensions;
 
-import in.co.mark.common.domain.model.ModelTimestamp;
-import in.co.mark.common.domain.model.UserSpecificModel;
-import in.co.mark.common.persistence.EntityTimestamp;
-import in.co.mark.common.persistence.UserSpecificEntity;
+import in.co.mark.common.domain.model.ModelBase;
+import in.co.mark.common.domain.model.OwnerModelBase;
+import in.co.mark.common.persistence.EntityBase;
+import in.co.mark.common.persistence.OwnerEntityBase;
 
 public class ModelEntityMapperExtn {
 	/**
@@ -17,7 +17,7 @@ public class ModelEntityMapperExtn {
 	 * @param modelInstance  A <i>model</i> instance of type {@code ModelTimestamp}
 	 *                       to update the values from
 	 */
-	public static void updateTimestamp(EntityTimestamp entityInstance, ModelTimestamp modelInstance) {
+	public static void updateTimestamp(EntityBase entityInstance, ModelBase modelInstance) {
 		entityInstance.setCreatedOn(modelInstance.getCreatedOn());
 		entityInstance.setLastUpdatedOn(modelInstance.getLastUpdatedOn());
 	}
@@ -32,7 +32,7 @@ public class ModelEntityMapperExtn {
 	 * @param entityInstance An <i>entity</i> instance of type
 	 *                       {@code EntityTimestamp} to update the values from
 	 */
-	public static void updateTimestamp(ModelTimestamp modelInstance, EntityTimestamp entityInstance) {
+	public static void updateTimestamp(ModelBase modelInstance, EntityBase entityInstance) {
 		modelInstance.setCreatedOn(entityInstance.getCreatedOn());
 		modelInstance.setLastUpdatedOn(entityInstance.getLastUpdatedOn());
 	}
@@ -47,8 +47,8 @@ public class ModelEntityMapperExtn {
 	 * @param entityInstance An <i>entity</i> instance of type
 	 *                       {@code UserSpecificEntity} to update the values from
 	 */
-	public static void updateUserIdAndTimestamp(UserSpecificModel modelInstance, UserSpecificEntity entityInstance) {
-		modelInstance.setOwnerUserId(entityInstance.getOwnerUserId());
+	public static void updateUserIdAndTimestamp(OwnerModelBase modelInstance, OwnerEntityBase entityInstance) {
+		modelInstance.setOwnerId(entityInstance.getOwnerId());
 		modelInstance.setCreatedOn(entityInstance.getCreatedOn());
 		modelInstance.setLastUpdatedOn(entityInstance.getLastUpdatedOn());
 	}
@@ -64,8 +64,8 @@ public class ModelEntityMapperExtn {
 	 * @param modelInstance  A <i>model</i> instance of type
 	 *                       {@code UserSpecificModel} to update the values from
 	 */
-	public static void updateUserIdAndTimestamp(UserSpecificEntity entityInstance, UserSpecificModel modelInstance) {
-		entityInstance.setOwnerUserId(modelInstance.getOwnerUserId());
+	public static void updateUserIdAndTimestamp(OwnerEntityBase entityInstance, OwnerModelBase modelInstance) {
+		entityInstance.setOwnerId(modelInstance.getOwnerId());
 		entityInstance.setCreatedOn(modelInstance.getCreatedOn());
 		entityInstance.setLastUpdatedOn(modelInstance.getLastUpdatedOn());
 	}

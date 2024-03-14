@@ -1,20 +1,20 @@
 package in.co.mark.common.domain.model;
 
 /**
- * A model base class with {@code createdOn} and {@code lastUpdatedOn}
- * properties and their respective getter/setter methods. Other model classes
- * can extend it to avoid re-defining these common properties/methods.
+ * A base model class with properties and the respective getter/setter methods
+ * to store <i>created</i> and <i>last updated</i> time. Other model classes can
+ * extend it to avoid redefining these common properties/methods.
  * 
  * @author Rakesh Kumar
  */
-public class ModelTimestamp {
+public class ModelBase {
 	protected long createdOn;
 	protected long lastUpdatedOn;
 
 	/**
 	 * Default constructor
 	 */
-	public ModelTimestamp() {
+	public ModelBase() {
 
 	}
 
@@ -26,7 +26,7 @@ public class ModelTimestamp {
 	 * @param lastUpdatedOn A timestamp indicating when the respective DB record was
 	 *                      last updated
 	 */
-	protected ModelTimestamp(long createdOn, long lastUpdatedOn) {
+	protected ModelBase(long createdOn, long lastUpdatedOn) {
 		this.createdOn = createdOn;
 		this.lastUpdatedOn = lastUpdatedOn;
 	}

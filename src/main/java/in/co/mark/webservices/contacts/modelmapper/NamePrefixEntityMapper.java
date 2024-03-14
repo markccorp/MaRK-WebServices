@@ -14,14 +14,15 @@ public class NamePrefixEntityMapper implements ModelEntityMapper<NamePrefix, Nam
 
 	@Override
 	public NamePrefix mapToModel(NamePrefixEObj entity) {
-		NamePrefix model = new NamePrefix(entity.getId(), entity.getOwnerUserId(), entity.getNamePrefix(),
-				entity.getDesc(), entity.getCreatedOn(), entity.getLastUpdatedOn());
+		NamePrefix model = new NamePrefix(entity.getId(), entity.getOwnerId(), entity.isOwnerOrg(),
+				entity.getNamePrefix(), entity.getDesc(), entity.getCreatedOn(), entity.getLastUpdatedOn());
 		return model;
 	}
 
 	@Override
 	public NamePrefixEObj mapToEntity(NamePrefix model) {
-		NamePrefixEObj entity = new NamePrefixEObj(model.getId(), model.getNamePrefix(), model.getDesc());
+		NamePrefixEObj entity = new NamePrefixEObj(model.getId(), model.isOwnerOrg(), model.getNamePrefix(),
+				model.getDesc());
 		entity.updateUserIdAndTimestamp(model);
 		return entity;
 	}

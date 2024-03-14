@@ -2,16 +2,15 @@ package in.co.mark.webservices.contacts.services;
 
 import in.co.mark.common.persistence.RecordsPage;
 import in.co.mark.webservices.contacts.domain.model.NamePrefix;
-import in.co.mark.webservices.contacts.gateway.dto.CreateNamePrefixRequest;
 
 public interface NamePrefixesService {
 	/**
 	 * To create a new name prefix
 	 * 
-	 * @param reqDto Request DTO for creating a new name prefix
-	 * @return Response DTO on successful creation of the name prefix
+	 * @param reqObj Request object for creating a new name prefix
+	 * @return Newly created name prefix
 	 */
-	public NamePrefix createNamePrefix(CreateNamePrefixRequest reqDto);
+	public NamePrefix createNamePrefix(NamePrefix reqObj);
 
 	/**
 	 * To get a name prefix by ID
@@ -20,7 +19,7 @@ public interface NamePrefixesService {
 	 * @return A {@link NamePrefix}, if found for the given {@code id}; otherwise,
 	 *         {@code null}
 	 */
-	public NamePrefix getNamePrefixById(int id);
+	public NamePrefix getNamePrefixById(long id);
 
 	/**
 	 * To get a paginated list of name prefixes

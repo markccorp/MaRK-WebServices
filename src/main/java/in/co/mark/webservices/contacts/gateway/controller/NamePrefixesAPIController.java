@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import in.co.mark.common.persistence.RecordsPage;
 import in.co.mark.webservices.contacts.domain.model.NamePrefix;
-import in.co.mark.webservices.contacts.gateway.dto.CreateNamePrefixRequest;
 import in.co.mark.webservices.contacts.services.NamePrefixesService;
 
 @RestController
@@ -30,15 +29,15 @@ public class NamePrefixesAPIController {
 
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public NamePrefix createNamePrefix(@RequestBody CreateNamePrefixRequest request) {
+	public NamePrefix createNamePrefix(@RequestBody NamePrefix request) {
 		NamePrefix namePrefix = namePrefixesService.createNamePrefix(request);
-		logger.info("Name prefix created successfully with ID: {0} for user: {1}", namePrefix.getId(),
-				namePrefix.getOwnerUserId());
+		logger.info("Name prefix created successfully with ID: {0} for owner: {1}", namePrefix.getId(),
+				namePrefix.getOwnerId());
 		return namePrefix;
 	}
 
 	@GetMapping(value = "/{id}")
-	public NamePrefix getNamePrefixById(@PathVariable int id) {
+	public NamePrefix getNamePrefixById(@PathVariable long id) {
 		NamePrefix namePrefix = namePrefixesService.getNamePrefixById(id);
 		if (namePrefix == null) {
 			logger.info("No name-prefix found with ID: {0}", id);

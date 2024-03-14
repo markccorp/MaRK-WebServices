@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import in.co.mark.common.persistence.RecordsPage;
 import in.co.mark.webservices.contacts.domain.model.NameSuffix;
-import in.co.mark.webservices.contacts.gateway.dto.CreateNameSuffixRequest;
-import in.co.mark.webservices.contacts.gateway.dto.CreateNameSuffixResponse;
 import in.co.mark.webservices.contacts.services.NameSuffixesService;
 
 @RestController
@@ -31,14 +29,15 @@ public class NameSuffixesAPIController {
 
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public CreateNameSuffixResponse createNameSuffix(@RequestBody CreateNameSuffixRequest request) {
-		CreateNameSuffixResponse response = nameSuffixesService.createNameSuffix(request);
-		logger.info("Name-suffix created successfully with ID: {0}", response.id());
+	public NameSuffix createNameSuffix(@RequestBody NameSuffix request) {
+		NameSuffix response = nameSuffixesService.createNameSuffix(request);
+		logger.info("Name suffix created successfully with ID: {0} for owner: {1}", response.getId(),
+				response.getOwnerId());
 		return response;
 	}
 
 	@GetMapping(value = "/{id}")
-	public NameSuffix getNameSuffixById(@PathVariable int id) {
+	public NameSuffix getNameSuffixById(@PathVariable long id) {
 		NameSuffix nameSuffix = nameSuffixesService.getNameSuffixById(id);
 		if (nameSuffix == null) {
 			logger.info("No name-suffix found with ID: {0}", id);
