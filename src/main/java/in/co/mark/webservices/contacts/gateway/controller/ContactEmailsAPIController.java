@@ -58,7 +58,7 @@ public class ContactEmailsAPIController {
 	public ContactEmail getContactEmailById(@PathVariable long id) {
 		ContactEmail contactEmail = contactEmailsService.getContactEmailById(id);
 		if (contactEmail == null) {
-			logger.info("No name-prefix found with ID: {0}", id);
+			logger.info("No contact email found with ID: {0}", id);
 		}
 		return contactEmail;
 	}
@@ -66,7 +66,7 @@ public class ContactEmailsAPIController {
 	@GetMapping()
 	public RecordsPage<ContactEmail> getContactEmails(@RequestParam(defaultValue = "0") Integer pageNo,
 			@RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "1") Integer sortOrder,
-			@RequestParam(defaultValue = "contactEmail") String sortBy) {
+			@RequestParam(defaultValue = "emailAddress") String sortBy) {
 		return contactEmailsService.getContactEmails(pageNo, pageSize, sortOrder, sortBy);
 	}
 }

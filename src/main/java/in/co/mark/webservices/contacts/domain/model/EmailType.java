@@ -133,7 +133,7 @@ public class EmailType extends OwnerSpecificModelBase {
 	}
 
 	/**
-	 * To set a email type value
+	 * To set an email type value
 	 * 
 	 * @param emailType An email type value
 	 */

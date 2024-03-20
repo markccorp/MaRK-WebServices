@@ -24,15 +24,15 @@ public class ContactEmail extends OwnerSpecificModelBase {
 	}
 
 	/**
-	 * Initializes {@code ownerUserId}, {@code emailType}, and {@code desc}
-	 * properties of this instance
+	 * Initializes {@code ownerId}, {@code emailType}, and {@code desc} properties
+	 * of this instance
 	 * 
-	 * @param ownerUserId  ID of the owner user
+	 * @param ownerId      ID of the owner of this instance
 	 * @param emailTypeId  Email type ID
 	 * @param emailAddress Email type value of this instance
 	 */
-	public ContactEmail(long ownerUserId, long emailTypeId, String emailAddress) {
-		super(ownerUserId);
+	public ContactEmail(long ownerId, long emailTypeId, String emailAddress) {
+		super(ownerId);
 		this.emailTypeId = emailTypeId;
 		this.emailAddress = emailAddress;
 	}
@@ -41,7 +41,7 @@ public class ContactEmail extends OwnerSpecificModelBase {
 	 * Initializes all properties of this instance
 	 * 
 	 * @param id            DB ID of this instance
-	 * @param ownerUserId   ID of the owner user
+	 * @param ownerId       ID of the owner of this instance
 	 * @param emailTypeId   Email type ID
 	 * @param emailAddress  Email type value of this instance
 	 * @param status        Active status of this record
@@ -50,9 +50,9 @@ public class ContactEmail extends OwnerSpecificModelBase {
 	 * @param lastUpdatedOn A timestamp indicating when the respective DB record was
 	 *                      last updated
 	 */
-	public ContactEmail(long id, long ownerUserId, long emailTypeId, String emailAddress, EntityActiveStatus status,
+	public ContactEmail(long id, long ownerId, long emailTypeId, String emailAddress, EntityActiveStatus status,
 			long createdOn, long lastUpdatedOn) {
-		super(ownerUserId, createdOn, lastUpdatedOn);
+		super(ownerId, createdOn, lastUpdatedOn);
 		this.id = id;
 		this.emailTypeId = emailTypeId;
 		this.emailAddress = emailAddress;

@@ -16,7 +16,9 @@ import in.co.mark.webservices.contacts.persistence.entities.AddressTypeEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactAddressEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactEmailEObj;
+import in.co.mark.webservices.contacts.persistence.entities.ContactIdentifierEObj;
 import in.co.mark.webservices.contacts.persistence.entities.EmailTypeEObj;
+import in.co.mark.webservices.contacts.persistence.entities.IdentifierTypeEObj;
 import in.co.mark.webservices.contacts.persistence.entities.MaritalStatusEObj;
 import in.co.mark.webservices.contacts.persistence.entities.NamePrefixEObj;
 import in.co.mark.webservices.contacts.persistence.entities.NameSuffixEObj;
@@ -24,8 +26,10 @@ import in.co.mark.webservices.contacts.persistence.repositories.AddressTypesRepo
 import in.co.mark.webservices.contacts.persistence.repositories.AddressesRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.ContactAddressesRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.ContactEmailsRepository;
+import in.co.mark.webservices.contacts.persistence.repositories.ContactIdentifiersRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.ContactsRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.EmailTypesRepository;
+import in.co.mark.webservices.contacts.persistence.repositories.IdentifierTypesRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.MaritalStatusesRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.NamePrefixesRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.NameSuffixesRepository;
@@ -41,12 +45,15 @@ public class ContactsDBAdapterImpl implements ContactsDBAdapter {
 	private final EmailTypesRepository emailTypesRepo;
 	private final ContactEmailsRepository contactEmailsRepo;
 	private final MaritalStatusesRepository maritalStatusesRepo;
+	private final IdentifierTypesRepository identifierTypesRepo;
+	private final ContactIdentifiersRepository contactIdentifiersRepo;
 
 	public ContactsDBAdapterImpl(ContactsRepository contactsRepo, AddressesRepository addressesRepo,
 			AddressTypesRepository addressTypesRepo, ContactAddressesRepository contactAddressesRepo,
 			NamePrefixesRepository namePrefixesRepo, NameSuffixesRepository nameSuffixesRepo,
 			EmailTypesRepository emailTypesRepo, ContactEmailsRepository contactEmailsRepo,
-			MaritalStatusesRepository maritalStatusesRepo) {
+			MaritalStatusesRepository maritalStatusesRepo, IdentifierTypesRepository identifierTypesRepo,
+			ContactIdentifiersRepository contactIdentifiersRepo) {
 		this.contactsRepo = contactsRepo;
 		this.addressesRepo = addressesRepo;
 		this.addressTypesRepo = addressTypesRepo;
@@ -56,6 +63,8 @@ public class ContactsDBAdapterImpl implements ContactsDBAdapter {
 		this.emailTypesRepo = emailTypesRepo;
 		this.contactEmailsRepo = contactEmailsRepo;
 		this.maritalStatusesRepo = maritalStatusesRepo;
+		this.identifierTypesRepo = identifierTypesRepo;
+		this.contactIdentifiersRepo = contactIdentifiersRepo;
 	}
 
 	@Override
@@ -314,6 +323,64 @@ public class ContactsDBAdapterImpl implements ContactsDBAdapter {
 		Pageable paging = PageRequest.of(pageNo, pageSize, sortDirection, sortByProperties);
 		Slice<MaritalStatusEObj> slicedResult = maritalStatusesRepo.findAll(paging);
 		return new RecordsPageImpl<MaritalStatusEObj>(slicedResult.getContent(), slicedResult.getNumber(),
+				slicedResult.getSize(), slicedResult.hasNext());
+	}
+
+	@Override
+	public IdentifierTypeEObj createIdentifierType(IdentifierTypeEObj identifierTypeEObj) {
+		return identifierTypesRepo.save(identifierTypeEObj);
+	}
+
+	@Override
+	public IdentifierTypeEObj getIdentifierTypeById(long id) {
+		Optional<IdentifierTypeEObj> optionalIdentifierTypeEObj = identifierTypesRepo.findById(id);
+		return optionalIdentifierTypeEObj.orElse(null);
+	}
+
+	@Override
+	public RecordsPage<IdentifierTypeEObj> getIdentifierTypes(int pageNo, int pageSize) {
+		Pageable paging = PageRequest.of(pageNo, pageSize);
+		Slice<IdentifierTypeEObj> slicedResult = identifierTypesRepo.findAll(paging);
+		return new RecordsPageImpl<IdentifierTypeEObj>(slicedResult.getContent(), slicedResult.getNumber(),
+				slicedResult.getSize(), slicedResult.hasNext());
+	}
+
+	@Override
+	public RecordsPage<IdentifierTypeEObj> getIdentifierTypes(int pageNo, int pageSize, int sortOrder,
+			String... sortByProperties) {
+		Direction sortDirection = sortOrder != 0 ? Direction.ASC : Direction.DESC;
+		Pageable paging = PageRequest.of(pageNo, pageSize, sortDirection, sortByProperties);
+		Slice<IdentifierTypeEObj> slicedResult = identifierTypesRepo.findAll(paging);
+		return new RecordsPageImpl<IdentifierTypeEObj>(slicedResult.getContent(), slicedResult.getNumber(),
+				slicedResult.getSize(), slicedResult.hasNext());
+	}
+
+	@Override
+	public ContactIdentifierEObj createContactIdentifier(ContactIdentifierEObj contactIdentifierEObj) {
+		return contactIdentifiersRepo.save(contactIdentifierEObj);
+	}
+
+	@Override
+	public ContactIdentifierEObj getContactIdentifierById(long id) {
+		Optional<ContactIdentifierEObj> optionalContactIdentifierEObj = contactIdentifiersRepo.findById(id);
+		return optionalContactIdentifierEObj.orElse(null);
+	}
+
+	@Override
+	public RecordsPage<ContactIdentifierEObj> getContactIdentifiers(int pageNo, int pageSize) {
+		Pageable paging = PageRequest.of(pageNo, pageSize);
+		Slice<ContactIdentifierEObj> slicedResult = contactIdentifiersRepo.findAll(paging);
+		return new RecordsPageImpl<ContactIdentifierEObj>(slicedResult.getContent(), slicedResult.getNumber(),
+				slicedResult.getSize(), slicedResult.hasNext());
+	}
+
+	@Override
+	public RecordsPage<ContactIdentifierEObj> getContactIdentifiers(int pageNo, int pageSize, int sortOrder,
+			String... sortByProperties) {
+		Direction sortDirection = sortOrder != 0 ? Direction.ASC : Direction.DESC;
+		Pageable paging = PageRequest.of(pageNo, pageSize, sortDirection, sortByProperties);
+		Slice<ContactIdentifierEObj> slicedResult = contactIdentifiersRepo.findAll(paging);
+		return new RecordsPageImpl<ContactIdentifierEObj>(slicedResult.getContent(), slicedResult.getNumber(),
 				slicedResult.getSize(), slicedResult.hasNext());
 	}
 }

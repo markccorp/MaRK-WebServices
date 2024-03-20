@@ -6,7 +6,9 @@ import in.co.mark.webservices.contacts.persistence.entities.AddressTypeEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactAddressEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactEmailEObj;
+import in.co.mark.webservices.contacts.persistence.entities.ContactIdentifierEObj;
 import in.co.mark.webservices.contacts.persistence.entities.EmailTypeEObj;
+import in.co.mark.webservices.contacts.persistence.entities.IdentifierTypeEObj;
 import in.co.mark.webservices.contacts.persistence.entities.MaritalStatusEObj;
 import in.co.mark.webservices.contacts.persistence.entities.NamePrefixEObj;
 import in.co.mark.webservices.contacts.persistence.entities.NameSuffixEObj;
@@ -368,5 +370,85 @@ public interface ContactsDBAdapter {
 	 * @return A {@link RecordsPage} containing list of marital status entities
 	 */
 	public RecordsPage<MaritalStatusEObj> getMaritalStatuses(int pageNo, int pageSize, int sortOrder,
+			String... sortByProperties);
+
+	/**
+	 * To create a new identifier type record in DB
+	 * 
+	 * @param identifierTypeEObj IdentifierType entity to create
+	 * @return The newly created identifier type entity
+	 */
+	public IdentifierTypeEObj createIdentifierType(IdentifierTypeEObj identifierTypeEObj);
+
+	/**
+	 * To get an identifier type by ID from DB
+	 * 
+	 * @param id ID of an identifier type to get its details
+	 * @return A {@link IdentifierTypeEObj}, if found for the given {@code id};
+	 *         otherwise, {@code null}
+	 */
+	public IdentifierTypeEObj getIdentifierTypeById(long id);
+
+	/**
+	 * To get a paginated list of identifier types from DB
+	 * 
+	 * @param pageNo   Current page number
+	 * @param pageSize Size of the records per page
+	 * @return A {@link RecordsPage} containing list of identifier type entities
+	 */
+	public RecordsPage<IdentifierTypeEObj> getIdentifierTypes(int pageNo, int pageSize);
+
+	/**
+	 * To get a paginated and sorted list of identifier types from DB
+	 * 
+	 * @param pageNo           Current page number
+	 * @param pageSize         Size of the records per page
+	 * @param sortOrder        Set to 0 for sorting in descending order; otherwise,
+	 *                         it sorts in ascending order
+	 * @param sortByProperties Column names to the sort the records. It must not be
+	 *                         {@code null}
+	 * @return A {@link RecordsPage} containing list of identifier type entities
+	 */
+	public RecordsPage<IdentifierTypeEObj> getIdentifierTypes(int pageNo, int pageSize, int sortOrder,
+			String... sortByProperties);
+
+	/**
+	 * To create a new contact identifier record in DB
+	 * 
+	 * @param contactIdentifierEObj ContactIdentifier entity to create
+	 * @return The newly created contact identifier entity
+	 */
+	public ContactIdentifierEObj createContactIdentifier(ContactIdentifierEObj contactIdentifierEObj);
+
+	/**
+	 * To get a contact identifier by ID from DB
+	 * 
+	 * @param id ID of a contact identifier to get its details
+	 * @return A {@link ContactIdentifierEObj}, if found for the given {@code id};
+	 *         otherwise, {@code null}
+	 */
+	public ContactIdentifierEObj getContactIdentifierById(long id);
+
+	/**
+	 * To get a paginated list of contact identifier from DB
+	 * 
+	 * @param pageNo   Current page number
+	 * @param pageSize Size of the records per page
+	 * @return A {@link RecordsPage} containing list of contact identifier entities
+	 */
+	public RecordsPage<ContactIdentifierEObj> getContactIdentifiers(int pageNo, int pageSize);
+
+	/**
+	 * To get a paginated and sorted list of contact identifier from DB
+	 * 
+	 * @param pageNo           Current page number
+	 * @param pageSize         Size of the records per page
+	 * @param sortOrder        Set to 0 for sorting in descending order; otherwise,
+	 *                         it sorts in ascending order
+	 * @param sortByProperties Column names to the sort the records. It must not be
+	 *                         {@code null}
+	 * @return A {@link RecordsPage} containing list of contact identifier entities
+	 */
+	public RecordsPage<ContactIdentifierEObj> getContactIdentifiers(int pageNo, int pageSize, int sortOrder,
 			String... sortByProperties);
 }

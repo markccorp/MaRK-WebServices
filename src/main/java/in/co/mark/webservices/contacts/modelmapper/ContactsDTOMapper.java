@@ -5,10 +5,12 @@ import org.springframework.stereotype.Component;
 import in.co.mark.webservices.contacts.domain.model.Address;
 import in.co.mark.webservices.contacts.domain.model.Contact;
 import in.co.mark.webservices.contacts.domain.model.ContactEmail;
+import in.co.mark.webservices.contacts.domain.model.ContactIdentifier;
 import in.co.mark.webservices.contacts.gateway.controller.ContactsAPIController;
 import in.co.mark.webservices.contacts.gateway.dto.CreateAddressRequest;
 import in.co.mark.webservices.contacts.gateway.dto.CreateAddressResponse;
 import in.co.mark.webservices.contacts.gateway.dto.CreateContactEmailRequest;
+import in.co.mark.webservices.contacts.gateway.dto.CreateContactIdentifierRequest;
 import in.co.mark.webservices.contacts.gateway.dto.CreateContactRequest;
 import in.co.mark.webservices.contacts.gateway.dto.CreateContactResponse;
 
@@ -84,5 +86,18 @@ public class ContactsDTOMapper {
 	 */
 	public ContactEmail mapToContactEmail(CreateContactEmailRequest reqDto) {
 		return new ContactEmail(reqDto.ownerUserId(), reqDto.emailTypeId(), reqDto.emailAddress());
+	}
+
+	/**
+	 * To map the given {@code reqDto} to an equivalent {@link ContactIdentifier}
+	 * model object
+	 * 
+	 * @param reqDto A request DTO of type {@link CreateContactIdentifierRequest}
+	 * @return A {@link ContactIdentifier} model object
+	 */
+	public ContactIdentifier mapToContactIdentifier(CreateContactIdentifierRequest reqDto) {
+		return new ContactIdentifier(reqDto.ownerUserId(), reqDto.contactId(), reqDto.identifierTypeId(),
+				reqDto.identifierValue(), reqDto.desc(), reqDto.issueLocation(), reqDto.issueDate(),
+				reqDto.expiryDate());
 	}
 }
