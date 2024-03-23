@@ -7,6 +7,8 @@ import in.co.mark.webservices.contacts.persistence.entities.ContactAddressEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactEmailEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactIdentifierEObj;
+import in.co.mark.webservices.contacts.persistence.entities.ContactMethodCategoryEObj;
+import in.co.mark.webservices.contacts.persistence.entities.ContactMethodTypeEObj;
 import in.co.mark.webservices.contacts.persistence.entities.EmailTypeEObj;
 import in.co.mark.webservices.contacts.persistence.entities.IdentifierTypeEObj;
 import in.co.mark.webservices.contacts.persistence.entities.MaritalStatusEObj;
@@ -450,5 +452,87 @@ public interface ContactsDBAdapter {
 	 * @return A {@link RecordsPage} containing list of contact identifier entities
 	 */
 	public RecordsPage<ContactIdentifierEObj> getContactIdentifiers(int pageNo, int pageSize, int sortOrder,
+			String... sortByProperties);
+
+	/**
+	 * To create a new contact method category record in DB
+	 * 
+	 * @param contactMethodCategoryEObj Contact method category entity to create
+	 * @return The newly created contact method category entity
+	 */
+	public ContactMethodCategoryEObj createContactMethodCategory(ContactMethodCategoryEObj contactMethodCategoryEObj);
+
+	/**
+	 * To get a contact method category by ID from DB
+	 * 
+	 * @param id ID of a contact method category to get its details
+	 * @return A {@link ContactMethodCategoryEObj}, if found for the given
+	 *         {@code id}; otherwise, {@code null}
+	 */
+	public ContactMethodCategoryEObj getContactMethodCategoryById(long id);
+
+	/**
+	 * To get a paginated list of contact method categories from DB
+	 * 
+	 * @param pageNo   Current page number
+	 * @param pageSize Size of the records per page
+	 * @return A {@link RecordsPage} containing list of contact method category
+	 *         entities
+	 */
+	public RecordsPage<ContactMethodCategoryEObj> getContactMethodCategories(int pageNo, int pageSize);
+
+	/**
+	 * To get a paginated and sorted list of contact method categories from DB
+	 * 
+	 * @param pageNo           Current page number
+	 * @param pageSize         Size of the records per page
+	 * @param sortOrder        Set to 0 for sorting in descending order; otherwise,
+	 *                         it sorts in ascending order
+	 * @param sortByProperties Column names to the sort the records. It must not be
+	 *                         {@code null}
+	 * @return A {@link RecordsPage} containing list of contact method category
+	 *         entities
+	 */
+	public RecordsPage<ContactMethodCategoryEObj> getContactMethodCategories(int pageNo, int pageSize, int sortOrder,
+			String... sortByProperties);
+
+	/**
+	 * To create a new contact method type record in DB
+	 * 
+	 * @param contactMethodTypeEObj Contact method type entity to create
+	 * @return The newly created contact method type entity
+	 */
+	public ContactMethodTypeEObj createContactMethodType(ContactMethodTypeEObj contactMethodTypeEObj);
+
+	/**
+	 * To get a contact method type by ID from DB
+	 * 
+	 * @param id ID of a contact method type to get its details
+	 * @return A {@link ContactMethodTypeEObj}, if found for the given {@code id};
+	 *         otherwise, {@code null}
+	 */
+	public ContactMethodTypeEObj getContactMethodTypeById(long id);
+
+	/**
+	 * To get a paginated list of contact method categories from DB
+	 * 
+	 * @param pageNo   Current page number
+	 * @param pageSize Size of the records per page
+	 * @return A {@link RecordsPage} containing list of contact method type entities
+	 */
+	public RecordsPage<ContactMethodTypeEObj> getContactMethodTypes(int pageNo, int pageSize);
+
+	/**
+	 * To get a paginated and sorted list of contact method types from DB
+	 * 
+	 * @param pageNo           Current page number
+	 * @param pageSize         Size of the records per page
+	 * @param sortOrder        Set to 0 for sorting in descending order; otherwise,
+	 *                         it sorts in ascending order
+	 * @param sortByProperties Column names to the sort the records. It must not be
+	 *                         {@code null}
+	 * @return A {@link RecordsPage} containing list of contact method type entities
+	 */
+	public RecordsPage<ContactMethodTypeEObj> getContactMethodTypes(int pageNo, int pageSize, int sortOrder,
 			String... sortByProperties);
 }

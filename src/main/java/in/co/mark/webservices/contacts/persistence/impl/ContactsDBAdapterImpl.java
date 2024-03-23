@@ -17,6 +17,8 @@ import in.co.mark.webservices.contacts.persistence.entities.ContactAddressEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactEmailEObj;
 import in.co.mark.webservices.contacts.persistence.entities.ContactIdentifierEObj;
+import in.co.mark.webservices.contacts.persistence.entities.ContactMethodCategoryEObj;
+import in.co.mark.webservices.contacts.persistence.entities.ContactMethodTypeEObj;
 import in.co.mark.webservices.contacts.persistence.entities.EmailTypeEObj;
 import in.co.mark.webservices.contacts.persistence.entities.IdentifierTypeEObj;
 import in.co.mark.webservices.contacts.persistence.entities.MaritalStatusEObj;
@@ -27,6 +29,8 @@ import in.co.mark.webservices.contacts.persistence.repositories.AddressesReposit
 import in.co.mark.webservices.contacts.persistence.repositories.ContactAddressesRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.ContactEmailsRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.ContactIdentifiersRepository;
+import in.co.mark.webservices.contacts.persistence.repositories.ContactMethodCategoriesRepository;
+import in.co.mark.webservices.contacts.persistence.repositories.ContactMethodTypesRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.ContactsRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.EmailTypesRepository;
 import in.co.mark.webservices.contacts.persistence.repositories.IdentifierTypesRepository;
@@ -47,13 +51,17 @@ public class ContactsDBAdapterImpl implements ContactsDBAdapter {
 	private final MaritalStatusesRepository maritalStatusesRepo;
 	private final IdentifierTypesRepository identifierTypesRepo;
 	private final ContactIdentifiersRepository contactIdentifiersRepo;
+	private final ContactMethodCategoriesRepository contactMethodCategoriesRepo;
+	private final ContactMethodTypesRepository contactMethodTypesRepo;
 
 	public ContactsDBAdapterImpl(ContactsRepository contactsRepo, AddressesRepository addressesRepo,
 			AddressTypesRepository addressTypesRepo, ContactAddressesRepository contactAddressesRepo,
 			NamePrefixesRepository namePrefixesRepo, NameSuffixesRepository nameSuffixesRepo,
 			EmailTypesRepository emailTypesRepo, ContactEmailsRepository contactEmailsRepo,
 			MaritalStatusesRepository maritalStatusesRepo, IdentifierTypesRepository identifierTypesRepo,
-			ContactIdentifiersRepository contactIdentifiersRepo) {
+			ContactIdentifiersRepository contactIdentifiersRepo,
+			ContactMethodCategoriesRepository contactMethodCategoriesRepo,
+			ContactMethodTypesRepository contactMethodTypesRepo) {
 		this.contactsRepo = contactsRepo;
 		this.addressesRepo = addressesRepo;
 		this.addressTypesRepo = addressTypesRepo;
@@ -65,6 +73,8 @@ public class ContactsDBAdapterImpl implements ContactsDBAdapter {
 		this.maritalStatusesRepo = maritalStatusesRepo;
 		this.identifierTypesRepo = identifierTypesRepo;
 		this.contactIdentifiersRepo = contactIdentifiersRepo;
+		this.contactMethodCategoriesRepo = contactMethodCategoriesRepo;
+		this.contactMethodTypesRepo = contactMethodTypesRepo;
 	}
 
 	@Override
@@ -381,6 +391,65 @@ public class ContactsDBAdapterImpl implements ContactsDBAdapter {
 		Pageable paging = PageRequest.of(pageNo, pageSize, sortDirection, sortByProperties);
 		Slice<ContactIdentifierEObj> slicedResult = contactIdentifiersRepo.findAll(paging);
 		return new RecordsPageImpl<ContactIdentifierEObj>(slicedResult.getContent(), slicedResult.getNumber(),
+				slicedResult.getSize(), slicedResult.hasNext());
+	}
+
+	@Override
+	public ContactMethodCategoryEObj createContactMethodCategory(ContactMethodCategoryEObj contactMethodCategoryEObj) {
+		return contactMethodCategoriesRepo.save(contactMethodCategoryEObj);
+	}
+
+	@Override
+	public ContactMethodCategoryEObj getContactMethodCategoryById(long id) {
+		Optional<ContactMethodCategoryEObj> optionalContactMethodCategoryEObj = contactMethodCategoriesRepo
+				.findById(id);
+		return optionalContactMethodCategoryEObj.orElse(null);
+	}
+
+	@Override
+	public RecordsPage<ContactMethodCategoryEObj> getContactMethodCategories(int pageNo, int pageSize) {
+		Pageable paging = PageRequest.of(pageNo, pageSize);
+		Slice<ContactMethodCategoryEObj> slicedResult = contactMethodCategoriesRepo.findAll(paging);
+		return new RecordsPageImpl<ContactMethodCategoryEObj>(slicedResult.getContent(), slicedResult.getNumber(),
+				slicedResult.getSize(), slicedResult.hasNext());
+	}
+
+	@Override
+	public RecordsPage<ContactMethodCategoryEObj> getContactMethodCategories(int pageNo, int pageSize, int sortOrder,
+			String... sortByProperties) {
+		Direction sortDirection = sortOrder != 0 ? Direction.ASC : Direction.DESC;
+		Pageable paging = PageRequest.of(pageNo, pageSize, sortDirection, sortByProperties);
+		Slice<ContactMethodCategoryEObj> slicedResult = contactMethodCategoriesRepo.findAll(paging);
+		return new RecordsPageImpl<ContactMethodCategoryEObj>(slicedResult.getContent(), slicedResult.getNumber(),
+				slicedResult.getSize(), slicedResult.hasNext());
+	}
+
+	@Override
+	public ContactMethodTypeEObj createContactMethodType(ContactMethodTypeEObj contactMethodTypeEObj) {
+		return contactMethodTypesRepo.save(contactMethodTypeEObj);
+	}
+
+	@Override
+	public ContactMethodTypeEObj getContactMethodTypeById(long id) {
+		Optional<ContactMethodTypeEObj> optionalContactMethodTypeEObj = contactMethodTypesRepo.findById(id);
+		return optionalContactMethodTypeEObj.orElse(null);
+	}
+
+	@Override
+	public RecordsPage<ContactMethodTypeEObj> getContactMethodTypes(int pageNo, int pageSize) {
+		Pageable paging = PageRequest.of(pageNo, pageSize);
+		Slice<ContactMethodTypeEObj> slicedResult = contactMethodTypesRepo.findAll(paging);
+		return new RecordsPageImpl<ContactMethodTypeEObj>(slicedResult.getContent(), slicedResult.getNumber(),
+				slicedResult.getSize(), slicedResult.hasNext());
+	}
+
+	@Override
+	public RecordsPage<ContactMethodTypeEObj> getContactMethodTypes(int pageNo, int pageSize, int sortOrder,
+			String... sortByProperties) {
+		Direction sortDirection = sortOrder != 0 ? Direction.ASC : Direction.DESC;
+		Pageable paging = PageRequest.of(pageNo, pageSize, sortDirection, sortByProperties);
+		Slice<ContactMethodTypeEObj> slicedResult = contactMethodTypesRepo.findAll(paging);
+		return new RecordsPageImpl<ContactMethodTypeEObj>(slicedResult.getContent(), slicedResult.getNumber(),
 				slicedResult.getSize(), slicedResult.hasNext());
 	}
 }
