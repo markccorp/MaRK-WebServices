@@ -2,10 +2,10 @@ package in.co.mark.common.domain.model;
 
 /**
  * A base model class with a property and its getter/setter methods to store the
- * owner's ID ({@code ownerId}). It also inherits the properties and
- * getter/setter methods to store <i>created</i> and <i>last updated</i> time
- * form {@link ModelBase} class. Other model classes can extend it to avoid
- * redefining these common properties/methods.
+ * owner's ID ({@code ownerId}). It also inherits the properties and the
+ * respective getter/setter methods to store <i>created</i> and <i>last
+ * updated</i> time form {@link ModelBase} class. Other model classes can extend
+ * it to avoid redefining these common properties/methods.
  * <p>
  * An extending class with possibilities of having both <i>Organization</i> and
  * <i>User</i> specific instances can define an additional property, say
@@ -21,7 +21,7 @@ public abstract class OwnerSpecificModelBase extends ModelBase {
 	/**
 	 * Default constructor
 	 */
-	public OwnerSpecificModelBase() {
+	protected OwnerSpecificModelBase() {
 
 	}
 

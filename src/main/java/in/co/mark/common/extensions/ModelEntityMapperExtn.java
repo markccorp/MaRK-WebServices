@@ -2,8 +2,10 @@ package in.co.mark.common.extensions;
 
 import in.co.mark.common.domain.model.ModelBase;
 import in.co.mark.common.domain.model.OwnerSpecificModelBase;
+import in.co.mark.common.domain.model.OwnerSpecificTypeCodeModelBase;
 import in.co.mark.common.persistence.EntityBase;
 import in.co.mark.common.persistence.OwnerSpecificEntityBase;
+import in.co.mark.common.persistence.OwnerSpecificTypeCodeEntityBase;
 
 public class ModelEntityMapperExtn {
 	/**
@@ -68,6 +70,48 @@ public class ModelEntityMapperExtn {
 	public static void updateUserIdAndTimestamp(OwnerSpecificEntityBase entityInstance,
 			OwnerSpecificModelBase modelInstance) {
 		entityInstance.setOwnerId(modelInstance.getOwnerId());
+		entityInstance.setCreatedOn(modelInstance.getCreatedOn());
+		entityInstance.setLastUpdatedOn(modelInstance.getLastUpdatedOn());
+	}
+
+	////////////////
+	/**
+	 * To update the values of {@code ownerUserId}, {@code createdOn}, and
+	 * {@code lastUpdatedOn} properties of this <i>model</i> instance by that of
+	 * given <i>entity</i> instance
+	 * 
+	 * @param modelInstance  This <i>model</i> instance of type
+	 *                       {@code UserSpecificModel} to update the values to
+	 * @param entityInstance An <i>entity</i> instance of type
+	 *                       {@code UserSpecificEntity} to update the values from
+	 */
+	public static void updateTypeCodeUserIdAndTimestamp(OwnerSpecificTypeCodeModelBase modelInstance,
+			OwnerSpecificTypeCodeEntityBase entityInstance) {
+		modelInstance.setOwnerId(entityInstance.getOwnerId());
+		modelInstance.setTypeName(entityInstance.getTypeName());
+		modelInstance.setTypeCode(entityInstance.getTypeCode());
+		modelInstance.setDesc(entityInstance.getDesc());
+		modelInstance.setCreatedOn(entityInstance.getCreatedOn());
+		modelInstance.setLastUpdatedOn(entityInstance.getLastUpdatedOn());
+	}
+
+	/**
+	 * To update the values of {@code ownerUserId}, {@code createdOn}, and
+	 * {@code lastUpdatedOn} properties of this <i>entity</i> instance by that of
+	 * given <i>model</i> instance
+	 * 
+	 * 
+	 * @param entityInstance This <i>entity</i> instance of type
+	 *                       {@code UserSpecificEntity} to update the values to
+	 * @param modelInstance  A <i>model</i> instance of type
+	 *                       {@code UserSpecificModel} to update the values from
+	 */
+	public static void updateTypeCodeUserIdAndTimestamp(OwnerSpecificTypeCodeEntityBase entityInstance,
+			OwnerSpecificTypeCodeModelBase modelInstance) {
+		entityInstance.setOwnerId(modelInstance.getOwnerId());
+		entityInstance.setTypeName(modelInstance.getTypeName());
+		entityInstance.setTypeCode(modelInstance.getTypeCode());
+		entityInstance.setDesc(modelInstance.getDesc());
 		entityInstance.setCreatedOn(modelInstance.getCreatedOn());
 		entityInstance.setLastUpdatedOn(modelInstance.getLastUpdatedOn());
 	}

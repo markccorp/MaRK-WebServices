@@ -1,5 +1,7 @@
 package in.co.mark.webservices.contacts.persistence;
 
+import java.util.List;
+
 import in.co.mark.common.persistence.RecordsPage;
 import in.co.mark.webservices.contacts.persistence.entities.AddressEObj;
 import in.co.mark.webservices.contacts.persistence.entities.AddressTypeEObj;
@@ -263,13 +265,30 @@ public interface ContactsDBAdapter {
 	public EmailTypeEObj createEmailType(EmailTypeEObj emailTypeEObj);
 
 	/**
+	 * To create a list of email type records in the respective table.<br/>
+	 * It can be used to populate default email types like "Primary Email" etc.
+	 * 
+	 * @param emailTypeEObjList A {@link List} of {@link EmailTypeEObj} to create
+	 */
+	public void createEmailTypes(List<EmailTypeEObj> emailTypeEObjList);
+
+	/**
 	 * To get an email type by ID from DB
 	 * 
 	 * @param id ID of an email type to get its details
-	 * @return A {@link EmailTypeEObj}, if found for the given {@code id};
+	 * @return An {@link EmailTypeEObj}, if found for the given {@code id};
 	 *         otherwise, {@code null}
 	 */
 	public EmailTypeEObj getEmailTypeById(long id);
+
+	/**
+	 * To get an email type by its type-code value
+	 * 
+	 * @param typeCode Type-code value of an email type to get its details
+	 * @return An {@link EmailTypeEObj}, if found for the given {@code typeCode};
+	 *         otherwise, {@code null}
+	 */
+	public EmailTypeEObj getEmailTypeByCode(String typeCode);
 
 	/**
 	 * To get a paginated list of email types from DB

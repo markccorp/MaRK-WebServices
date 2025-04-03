@@ -85,7 +85,7 @@ public class ContactsDTOMapper {
 	 * @return A {@link ContactEmail} model object
 	 */
 	public ContactEmail mapToContactEmail(CreateContactEmailRequest reqDto) {
-		return new ContactEmail(reqDto.ownerUserId(), reqDto.emailTypeId(), reqDto.emailAddress());
+		return new ContactEmail(reqDto.ownerUserId(), reqDto.typeId(), reqDto.emailAddress());
 	}
 
 	/**

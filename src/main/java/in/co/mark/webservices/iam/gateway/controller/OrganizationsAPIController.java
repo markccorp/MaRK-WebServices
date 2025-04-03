@@ -30,8 +30,10 @@ public class OrganizationsAPIController {
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Organization createOrganization(@RequestBody Organization request) {
+		// TODO: Set the current user as SuperAdmin of the Org being created.
+		// For now, use the one provided in the request object.
 		Organization org = orgService.createOrganization(request);
-		logger.info("Organization created successfully with ID: {0}, created by: {1}", org.getId(),
+		logger.info("Organization created successfully with ID: {}, SuperAdmin: {}", org.getId(),
 				org.getSuperAdminId());
 		return org;
 	}
@@ -40,7 +42,7 @@ public class OrganizationsAPIController {
 	public Organization getOrganizationById(@PathVariable long id) {
 		Organization org = orgService.getOrganizationById(id);
 		if (org == null) {
-			logger.info("No organization found with ID: {0}", id);
+			logger.info("No organization found with ID: {}", id);
 		}
 		return org;
 	}

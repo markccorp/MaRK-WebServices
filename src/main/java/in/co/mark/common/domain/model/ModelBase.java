@@ -14,7 +14,7 @@ public abstract class ModelBase {
 	/**
 	 * Default constructor
 	 */
-	public ModelBase() {
+	protected ModelBase() {
 
 	}
 

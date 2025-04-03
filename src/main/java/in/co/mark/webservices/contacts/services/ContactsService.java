@@ -15,6 +15,14 @@ public interface ContactsService {
 	public CreateContactResponse createContact(CreateContactRequest reqDto);
 
 	/**
+	 * To add the specified contact as a new contact
+	 * 
+	 * @param contact A {@link Contact} to add
+	 * @return Newly added contact
+	 */
+	public Contact createContact(Contact contact);
+
+	/**
 	 * To get a contact by ID
 	 * 
 	 * @param id ID of a contact to get its details

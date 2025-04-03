@@ -13,16 +13,16 @@ import lombok.experimental.ExtensionMethod;
 public class EmailTypeEntityMapper implements ModelEntityMapper<EmailType, EmailTypeEObj> {
 	@Override
 	public EmailType mapToModel(EmailTypeEObj entity) {
-		EmailType model = new EmailType(entity.getId(), entity.getOwnerId(), entity.isOwnerOrg(), entity.getEmailType(),
-				entity.getDesc(), entity.getCreatedOn(), entity.getLastUpdatedOn());
+		EmailType model = new EmailType(entity.getId(), entity.getOwnerId(), entity.isOwnerOrg(),
+				entity.getTypeName(), entity.getTypeCode(), entity.getDesc(), entity.getCreatedOn(),
+				entity.getLastUpdatedOn());
 		return model;
 	}
 
 	@Override
 	public EmailTypeEObj mapToEntity(EmailType model) {
-		EmailTypeEObj entity = new EmailTypeEObj(model.getId(), model.isOwnerOrg(), model.getEmailType(),
-				model.getDesc());
-		entity.updateUserIdAndTimestamp(model);
+		EmailTypeEObj entity = new EmailTypeEObj(model.getId(), model.isOwnerOrg());
+		entity.updateTypeCodeUserIdAndTimestamp(model);
 		return entity;
 	}
 }

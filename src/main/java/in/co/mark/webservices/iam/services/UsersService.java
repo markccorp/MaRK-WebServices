@@ -1,18 +1,21 @@
 package in.co.mark.webservices.iam.services;
 
+import java.util.List;
+
 import in.co.mark.common.persistence.RecordsPage;
 import in.co.mark.webservices.iam.domain.model.User;
-import in.co.mark.webservices.iam.gateway.dto.CreateUserRequest;
-import in.co.mark.webservices.iam.gateway.dto.CreateUserResponse;
+import in.co.mark.webservices.iam.gateway.dto.UserRequestDTO;
 
 public interface UsersService {
 	/**
-	 * To create a new user
+	 * To create a new user with credentials
 	 * 
 	 * @param reqDto Request DTO for creating a new user
-	 * @return Response DTO on successful creation of the user
+	 * @return Newly created user
 	 */
-	public CreateUserResponse createUser(CreateUserRequest reqDto);
+	public User createUser(UserRequestDTO reqDto);
+
+	public User createUser(UserRequestDTO reqDto, boolean hasCredentials);
 
 	/**
 	 * To get a user by ID
@@ -36,4 +39,5 @@ public interface UsersService {
 
 	public RecordsPage<User> getUsers(int pageNo, int pageSize, int sortOrder, String... sortByProperties);
 
+	public List<User> getAllUsers(int pageNo, int pageSize, int sortOrder, String... sortByProperties);
 }

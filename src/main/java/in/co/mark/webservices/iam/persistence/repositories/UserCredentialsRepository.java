@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import in.co.mark.webservices.iam.persistence.entities.LoginCredentialEObj;
+import in.co.mark.webservices.iam.persistence.entities.UserCredentialEObj;
 
 @Repository
-public interface LoginCredentialsRepository extends JpaRepository<LoginCredentialEObj, Long> {
-	LoginCredentialEObj findByUsername(String username);
+public interface UserCredentialsRepository extends JpaRepository<UserCredentialEObj, Long> {
+	UserCredentialEObj findByUsername(String username);
 
 	@Modifying
-	@Query("UPDATE login_credentials lc SET lc.password = :password WHERE lc.id = :id")
+	@Query("UPDATE user_credentials uc SET uc.password = :password WHERE uc.id = :id")
 	void updateLoginPassword(@Param(value = "id") long id, @Param(value = "password") String password);
 }

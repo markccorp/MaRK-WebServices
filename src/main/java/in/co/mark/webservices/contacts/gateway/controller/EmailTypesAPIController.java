@@ -48,7 +48,7 @@ public class EmailTypesAPIController {
 	@GetMapping()
 	public RecordsPage<EmailType> getEmailTypes(@RequestParam(defaultValue = "0") Integer pageNo,
 			@RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "1") Integer sortOrder,
-			@RequestParam(defaultValue = "emailType") String sortBy) {
+			@RequestParam(defaultValue = "typeName") String sortBy) {
 		return emailTypesService.getEmailTypes(pageNo, pageSize, sortOrder, sortBy);
 	}
 }

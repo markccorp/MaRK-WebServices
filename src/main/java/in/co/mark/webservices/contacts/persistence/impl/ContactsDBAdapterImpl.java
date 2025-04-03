@@ -1,5 +1,6 @@
 package in.co.mark.webservices.contacts.persistence.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.PageRequest;
@@ -7,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import in.co.mark.common.persistence.RecordsPage;
 import in.co.mark.common.persistence.impl.RecordsPageImpl;
@@ -254,9 +256,23 @@ public class ContactsDBAdapterImpl implements ContactsDBAdapter {
 		return emailTypesRepo.save(emailTypeEObj);
 	}
 
+	@Transactional
+	@Override
+	public void createEmailTypes(List<EmailTypeEObj> emailTypeEObjList) {
+		for (EmailTypeEObj emailTypeEObj : emailTypeEObjList) {
+			emailTypesRepo.save(emailTypeEObj);
+		}
+	}
+
 	@Override
 	public EmailTypeEObj getEmailTypeById(long id) {
 		Optional<EmailTypeEObj> optionalEmailTypeEObj = emailTypesRepo.findById(id);
+		return optionalEmailTypeEObj.orElse(null);
+	}
+
+	@Override
+	public EmailTypeEObj getEmailTypeByCode(String typeCode) {
+		Optional<EmailTypeEObj> optionalEmailTypeEObj = emailTypesRepo.findByTypeCode(typeCode);
 		return optionalEmailTypeEObj.orElse(null);
 	}
 

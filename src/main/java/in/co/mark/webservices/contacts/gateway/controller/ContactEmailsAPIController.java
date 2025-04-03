@@ -37,13 +37,18 @@ public class ContactEmailsAPIController {
 	public ContactEmail createContactEmail(@RequestBody CreateContactEmailRequest request) {
 		ContactEmail contactEmail;
 
-		if (request.emailTypeId() != 0L) {
+		if (request.typeId() != 0L) {
 			contactEmail = contactEmailsService.createContactEmail(request);
 		} else {
 			logger.info("Creating a new email type first for the user: {0}, as no email type ID is provided",
 					request.ownerUserId());
-			String emailTypeName = request.emailType().trim(); // Email type must be available here
-			EmailType newEmailType = new EmailType(request.ownerUserId(), false, emailTypeName, emailTypeName);
+			String typeName = request.typeName().trim(); // Email type name must be available here
+			String typeCode = request.typeCode().trim();
+			if (typeCode == null || typeCode.isEmpty()) {
+				typeCode = typeName;
+			}
+			EmailType newEmailType = new EmailType(request.ownerUserId(), false, typeName, typeCode,
+					null);
 			newEmailType = emailTypesService.createEmailType(newEmailType);
 			contactEmail = new ContactEmail(request.ownerUserId(), newEmailType.getId(), request.emailAddress());
 			contactEmail = contactEmailsService.createContactEmail(contactEmail);

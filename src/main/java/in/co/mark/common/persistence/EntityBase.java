@@ -34,7 +34,7 @@ public abstract class EntityBase {
 	/**
 	 * Default constructor
 	 */
-	public EntityBase() {
+	protected EntityBase() {
 
 	}
 

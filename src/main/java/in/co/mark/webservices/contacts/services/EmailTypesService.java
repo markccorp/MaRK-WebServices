@@ -16,8 +16,8 @@ public interface EmailTypesService {
 	 * To get an email type by ID
 	 * 
 	 * @param id ID of an email type to get its details
-	 * @return An {@link EmailType}, if found for the given {@code id}; otherwise,
-	 *         {@code null}
+	 * @return An {@link EmailType}, if found for the given {@code id};
+	 *         otherwise, {@code null}
 	 */
 	public EmailType getEmailTypeById(long id);
 
@@ -41,5 +41,6 @@ public interface EmailTypesService {
 	 *                         {@code null}
 	 * @return A {@link RecordsPage} containing list of email type entities
 	 */
-	public RecordsPage<EmailType> getEmailTypes(int pageNo, int pageSize, int sortOrder, String... sortByProperties);
+	public RecordsPage<EmailType> getEmailTypes(int pageNo, int pageSize, int sortOrder,
+			String... sortByProperties);
 }

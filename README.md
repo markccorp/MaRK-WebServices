@@ -5,7 +5,7 @@ EmailType
 ---------
 EmailType					- OwnerSpecificModelBase<br/>
 EmailTypeEObj				- OwnerSpecificEntityBase<br/>
-Request/Responbse DTO		- May not be always needed<br/>
+Request/Response DTO		- May not be always needed<br/>
 EmailTypeEntityMapper		- @Component<br/>
 EmailTypesRepository		- @Repository<br/>
 ContactsDBAdapter<br/>
