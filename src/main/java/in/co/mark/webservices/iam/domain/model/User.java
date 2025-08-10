@@ -30,8 +30,8 @@ public class User extends ModelBase {
 	/** Display name or nick name of this user */
 	private String displayName;
 	/**
-	 * Gender of this user. Possible values: <b>M</b> - Male, <b>F</b> - Female, or
-	 * <b>O</b> - Other.
+	 * Gender of this user. Possible values: <b>M</b> - Male, <b>F</b> - Female,
+	 * <b>O</b> - Other, or <b>U</b> - Unknown.
 	 */
 	private char gender;
 	/** Date part of the date-of-birth of this user */

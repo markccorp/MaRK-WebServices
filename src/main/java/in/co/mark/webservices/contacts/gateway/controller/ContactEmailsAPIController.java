@@ -40,7 +40,7 @@ public class ContactEmailsAPIController {
 		if (request.typeId() != 0L) {
 			contactEmail = contactEmailsService.createContactEmail(request);
 		} else {
-			logger.info("Creating a new email type first for the user: {0}, as no email type ID is provided",
+			logger.info("Creating a new email type first for the user: {}, as no email type ID is provided",
 					request.ownerUserId());
 			String typeName = request.typeName().trim(); // Email type name must be available here
 			String typeCode = request.typeCode().trim();
@@ -54,7 +54,7 @@ public class ContactEmailsAPIController {
 			contactEmail = contactEmailsService.createContactEmail(contactEmail);
 		}
 
-		logger.info("Contact email created successfully with ID: {0} for user: {1}", contactEmail.getId(),
+		logger.info("Contact email created successfully with ID: {} for user: {}", contactEmail.getId(),
 				contactEmail.getOwnerId());
 		return contactEmail;
 	}
@@ -63,7 +63,7 @@ public class ContactEmailsAPIController {
 	public ContactEmail getContactEmailById(@PathVariable long id) {
 		ContactEmail contactEmail = contactEmailsService.getContactEmailById(id);
 		if (contactEmail == null) {
-			logger.info("No contact email found with ID: {0}", id);
+			logger.info("No contact email found with ID: {}", id);
 		}
 		return contactEmail;
 	}

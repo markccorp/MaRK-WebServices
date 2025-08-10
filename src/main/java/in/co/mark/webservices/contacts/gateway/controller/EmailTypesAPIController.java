@@ -31,7 +31,7 @@ public class EmailTypesAPIController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public EmailType createEmailType(@RequestBody EmailType request) {
 		EmailType emailType = emailTypesService.createEmailType(request);
-		logger.info("Email type created successfully with ID: {0} for owner: {1}", emailType.getId(),
+		logger.info("Email type created successfully with ID: {} for owner: {}", emailType.getId(),
 				emailType.getOwnerId());
 		return emailType;
 	}
@@ -40,7 +40,7 @@ public class EmailTypesAPIController {
 	public EmailType getEmailTypeById(@PathVariable long id) {
 		EmailType emailType = emailTypesService.getEmailTypeById(id);
 		if (emailType == null) {
-			logger.info("No email type found with ID: {0}", id);
+			logger.info("No email type found with ID: {}", id);
 		}
 		return emailType;
 	}

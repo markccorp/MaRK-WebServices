@@ -31,7 +31,7 @@ public class AddressTypesAPIController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public AddressType createAddressType(@RequestBody AddressType request) {
 		AddressType response = addressTypesService.createAddressType(request);
-		logger.info("Address type created successfully with ID: {0} for owner: {1}", response.getId(),
+		logger.info("Address type created successfully with ID: {} for owner: {}", response.getId(),
 				response.getOwnerId());
 		return response;
 	}
@@ -40,7 +40,7 @@ public class AddressTypesAPIController {
 	public AddressType getAddressTypeById(@PathVariable long id) {
 		AddressType addressType = addressTypesService.getAddressTypeById(id);
 		if (addressType == null) {
-			logger.info("No address-type found with ID: {0}", id);
+			logger.info("No address-type found with ID: {}", id);
 		}
 		return addressType;
 	}

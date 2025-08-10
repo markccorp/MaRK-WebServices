@@ -31,7 +31,7 @@ public class ContactMethodTypesAPIController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ContactMethodType createContactMethodType(@RequestBody ContactMethodType request) {
 		ContactMethodType contactMethodType = contactMethodTypesService.createContactMethodType(request);
-		logger.info("Contact method type created successfully with ID: {0} for owner: {1}", contactMethodType.getId(),
+		logger.info("Contact method type created successfully with ID: {} for owner: {}", contactMethodType.getId(),
 				contactMethodType.getOwnerId());
 		return contactMethodType;
 	}
@@ -40,7 +40,7 @@ public class ContactMethodTypesAPIController {
 	public ContactMethodType getContactMethodTypeById(@PathVariable long id) {
 		ContactMethodType contactMethodType = contactMethodTypesService.getContactMethodTypeById(id);
 		if (contactMethodType == null) {
-			logger.info("No contact method type found with ID: {0}", id);
+			logger.info("No contact method type found with ID: {}", id);
 		}
 		return contactMethodType;
 	}

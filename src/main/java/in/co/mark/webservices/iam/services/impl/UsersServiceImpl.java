@@ -79,7 +79,7 @@ public class UsersServiceImpl implements UsersService {
 				username = reqDto.getUsername().trim();
 			} else {
 				logger.debug("Using email as username, as no separate username provided");
-				username = reqDto.getEmail();
+				username = reqDto.getEmail().trim();
 			}
 			UserCredentialEObj userCredEObj = new UserCredentialEObj();
 			userCredEObj.setUsername(username);

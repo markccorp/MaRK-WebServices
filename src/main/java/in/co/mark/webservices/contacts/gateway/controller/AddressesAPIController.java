@@ -33,7 +33,7 @@ public class AddressesAPIController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public CreateAddressResponse createAddress(@RequestBody CreateAddressRequest request) {
 		CreateAddressResponse response = addressesService.createAddress(request);
-		logger.info("Address created successfully with ID: {0}", response.id());
+		logger.info("Address created successfully with ID: {}", response.id());
 		return response;
 	}
 
@@ -41,7 +41,7 @@ public class AddressesAPIController {
 	public Address getAddressById(@PathVariable long id) {
 		Address address = addressesService.getAddressById(id);
 		if (address == null) {
-			logger.info("No address found with ID: {0}", id);
+			logger.info("No address found with ID: {}", id);
 		}
 		return address;
 	}

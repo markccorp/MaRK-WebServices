@@ -32,7 +32,7 @@ public class ContactMethodCategoriesAPIController {
 	public ContactMethodCategory createContactMethodCategory(@RequestBody ContactMethodCategory request) {
 		ContactMethodCategory contactMethodCategory = contactMethodCategoriesService
 				.createContactMethodCategory(request);
-		logger.info("Contact method category created successfully with ID: {0} for owner: {1}",
+		logger.info("Contact method category created successfully with ID: {} for owner: {}",
 				contactMethodCategory.getId(), contactMethodCategory.getOwnerId());
 		return contactMethodCategory;
 	}
@@ -41,7 +41,7 @@ public class ContactMethodCategoriesAPIController {
 	public ContactMethodCategory getContactMethodCategoryById(@PathVariable long id) {
 		ContactMethodCategory contactMethodCategory = contactMethodCategoriesService.getContactMethodCategoryById(id);
 		if (contactMethodCategory == null) {
-			logger.info("No contact method category found with ID: {0}", id);
+			logger.info("No contact method category found with ID: {}", id);
 		}
 		return contactMethodCategory;
 	}

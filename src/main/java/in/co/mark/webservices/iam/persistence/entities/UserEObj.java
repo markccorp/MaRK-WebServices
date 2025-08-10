@@ -59,7 +59,10 @@ public class UserEObj extends EntityBase {
 	@Column(name = "display_name")
 	private String displayName;
 
-	/** Possible values: <b>M</b> - Male, <b>F</b> - Female, or <b>O</b> - Other */
+	/**
+	 * Gender of this user. Possible values: <b>M</b> - Male, <b>F</b> - Female,
+	 * <b>O</b> - Other, or <b>U</b> - Unknown.
+	 */
 	@Getter
 	@Setter
 	@Column(name = "gender", length = 1)

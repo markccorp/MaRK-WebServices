@@ -41,7 +41,7 @@ public class ContactIdentifiersAPIController {
 		if (request.identifierTypeId() != 0L) {
 			contactIdentifier = contactIdentifiersService.createContactIdentifier(request);
 		} else {
-			logger.info("Creating a new identifier type first for the user: {0}, as no identifier type ID is provided",
+			logger.info("Creating a new identifier type first for the user: {}, as no identifier type ID is provided",
 					request.ownerUserId());
 			String identifierTypeName = request.identifierType().trim(); // Identifier type must be available here
 			IdentifierType newIdentifierType = new IdentifierType(request.ownerUserId(), identifierTypeName,
@@ -53,7 +53,7 @@ public class ContactIdentifiersAPIController {
 			contactIdentifier = contactIdentifiersService.createContactIdentifier(contactIdentifier);
 		}
 
-		logger.info("Contact identifier created successfully with ID: {0} for user: {1}", contactIdentifier.getId(),
+		logger.info("Contact identifier created successfully with ID: {} for user: {}", contactIdentifier.getId(),
 				contactIdentifier.getOwnerId());
 		return contactIdentifier;
 	}
@@ -62,7 +62,7 @@ public class ContactIdentifiersAPIController {
 	public ContactIdentifier getContactIdentifierById(@PathVariable long id) {
 		ContactIdentifier contactIdentifier = contactIdentifiersService.getContactIdentifierById(id);
 		if (contactIdentifier == null) {
-			logger.info("No contact identifier found with ID: {0}", id);
+			logger.info("No contact identifier found with ID: {}", id);
 		}
 		return contactIdentifier;
 	}

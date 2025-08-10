@@ -31,7 +31,7 @@ public class NameSuffixesAPIController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public NameSuffix createNameSuffix(@RequestBody NameSuffix request) {
 		NameSuffix response = nameSuffixesService.createNameSuffix(request);
-		logger.info("Name suffix created successfully with ID: {0} for owner: {1}", response.getId(),
+		logger.info("Name suffix created successfully with ID: {} for owner: {}", response.getId(),
 				response.getOwnerId());
 		return response;
 	}
@@ -40,7 +40,7 @@ public class NameSuffixesAPIController {
 	public NameSuffix getNameSuffixById(@PathVariable long id) {
 		NameSuffix nameSuffix = nameSuffixesService.getNameSuffixById(id);
 		if (nameSuffix == null) {
-			logger.info("No name-suffix found with ID: {0}", id);
+			logger.info("No name-suffix found with ID: {}", id);
 		}
 		return nameSuffix;
 	}

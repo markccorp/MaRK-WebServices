@@ -31,7 +31,7 @@ public class NamePrefixesAPIController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public NamePrefix createNamePrefix(@RequestBody NamePrefix request) {
 		NamePrefix namePrefix = namePrefixesService.createNamePrefix(request);
-		logger.info("Name prefix created successfully with ID: {0} for owner: {1}", namePrefix.getId(),
+		logger.info("Name prefix created successfully with ID: {} for owner: {}", namePrefix.getId(),
 				namePrefix.getOwnerId());
 		return namePrefix;
 	}
@@ -40,7 +40,7 @@ public class NamePrefixesAPIController {
 	public NamePrefix getNamePrefixById(@PathVariable long id) {
 		NamePrefix namePrefix = namePrefixesService.getNamePrefixById(id);
 		if (namePrefix == null) {
-			logger.info("No name prefix found with ID: {0}", id);
+			logger.info("No name prefix found with ID: {}", id);
 		}
 		return namePrefix;
 	}

@@ -31,7 +31,7 @@ public class IdentifierTypesAPIController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public IdentifierType createIdentifierType(@RequestBody IdentifierType request) {
 		IdentifierType identifierType = identifierTypesService.createIdentifierType(request);
-		logger.info("Identifier type created successfully with ID: {0} for owner: {1}", identifierType.getId(),
+		logger.info("Identifier type created successfully with ID: {} for owner: {}", identifierType.getId(),
 				identifierType.getOwnerId());
 		return identifierType;
 	}
@@ -40,7 +40,7 @@ public class IdentifierTypesAPIController {
 	public IdentifierType getIdentifierTypeById(@PathVariable long id) {
 		IdentifierType identifierType = identifierTypesService.getIdentifierTypeById(id);
 		if (identifierType == null) {
-			logger.info("No identifier type found with ID: {0}", id);
+			logger.info("No identifier type found with ID: {}", id);
 		}
 		return identifierType;
 	}

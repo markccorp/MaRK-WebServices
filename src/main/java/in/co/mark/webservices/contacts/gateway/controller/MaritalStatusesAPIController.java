@@ -31,7 +31,7 @@ public class MaritalStatusesAPIController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public MaritalStatus createMaritalStatus(@RequestBody MaritalStatus request) {
 		MaritalStatus maritalStatus = maritalStatusesService.createMaritalStatus(request);
-		logger.info("Marital status created successfully with ID: {0} for owner: {1}", maritalStatus.getId(),
+		logger.info("Marital status created successfully with ID: {} for owner: {}", maritalStatus.getId(),
 				maritalStatus.getOwnerId());
 		return maritalStatus;
 	}
@@ -40,7 +40,7 @@ public class MaritalStatusesAPIController {
 	public MaritalStatus getMaritalStatusById(@PathVariable long id) {
 		MaritalStatus maritalStatus = maritalStatusesService.getMaritalStatusById(id);
 		if (maritalStatus == null) {
-			logger.info("No marital status found with ID: {0}", id);
+			logger.info("No marital status found with ID: {}", id);
 		}
 		return maritalStatus;
 	}

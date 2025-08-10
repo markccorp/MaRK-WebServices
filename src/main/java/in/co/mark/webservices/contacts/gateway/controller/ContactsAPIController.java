@@ -33,15 +33,16 @@ public class ContactsAPIController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public CreateContactResponse createContact(@RequestBody CreateContactRequest request) {
 		CreateContactResponse response = contactsService.createContact(request);
-		logger.info("Contact created successfully with ID: {0}", response.id());
+		logger.info("Contact created successfully with ID: {}", response.id());
 		return response;
 	}
 
 	@GetMapping(value = "/{id}")
 	public Contact getContactById(@PathVariable long id) {
+		System.out.println("Working dir: " + System.getProperty("user.dir"));
 		Contact contact = contactsService.getContactById(id);
 		if (contact == null) {
-			logger.info("No contact found with ID: {0}", id);
+			logger.info("No contact found with ID: {}", id);
 		}
 		return contact;
 	}

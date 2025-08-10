@@ -19,7 +19,7 @@ public class Organization extends ModelBase {
 	/**
 	 * ID of the parent organization, if any.
 	 * <p>
-	 * It can be used to, say deactivate all organization just by deactivating the
+	 * It can be used to, say, deactivate all organization just by deactivating the
 	 * parent organization. However, activating organization should be done
 	 * individually.
 	 * </p>
