@@ -61,11 +61,11 @@ public class UserEObj extends EntityBase {
 
 	/**
 	 * Gender of this user. Possible values: <b>M</b> - Male, <b>F</b> - Female,
-	 * <b>O</b> - Other, or <b>U</b> - Unknown.
+	 * <b>O</b> - Other, or <b>U</b> - Unknown
 	 */
 	@Getter
 	@Setter
-	@Column(name = "gender", length = 1)
+	@Column(name = "gender", length = 1, nullable = true)
 	private char gender;
 
 	/** Date part of the date of birth of this user */

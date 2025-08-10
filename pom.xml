@@ -41,6 +41,34 @@
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
 		</dependency>
+		
+		<!-- Logging Configuration: Disable the Spring Boot's default Logback -->
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter</artifactId>
+    		<exclusions>
+        		<exclusion>
+            		<groupId>org.springframework.boot</groupId>
+            		<artifactId>spring-boot-starter-logging</artifactId>
+        		</exclusion>
+    		</exclusions>
+		</dependency>
+		<!-- Logging Configuration: Enable Log4j2 -->
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+		<!-- Logging Configuration: Core Log4j2 functionality -->
+		<dependency>
+    		<groupId>org.apache.logging.log4j</groupId>
+    		<artifactId>log4j-core</artifactId>
+		</dependency>
+		<!-- Logging Configuration: Logging API (Needed to use Log4j2 directly) -->
+		<dependency>
+    		<groupId>org.apache.logging.log4j</groupId>
+    		<artifactId>log4j-api</artifactId>
+		</dependency>
+	
 
 		<dependency>
 			<groupId>org.postgresql</groupId>

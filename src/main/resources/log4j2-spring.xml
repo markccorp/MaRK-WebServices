@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+<!-- monitorInterval (specified in seconds) tells Log4j2 to check and, if changed, automatically reload the configuration. -->
+    <Properties>
+    	<Property name="APP_NAME">MaRKApplication</Property>
+        <Property name="LOG_PATH">logs</Property>
+        <Property name="LOG_PATTERN">[%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5level][%c{1.1.1.*}][%t] %msg%n</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- Async Appender for your app package -->
+        <RollingFile name="AppFile" fileName="${LOG_PATH}/${APP_NAME}.log"
+                     filePattern="${LOG_PATH}/${APP_NAME}-%i.log.gz">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <SizeBasedTriggeringPolicy size="1MB"/>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+        <Async name="AsyncAppFile">
+            <AppenderRef ref="AppFile"/>
+        </Async>
+
+        <!-- Async Appender for Spring (WebService) logs -->
+        <RollingFile name="WebServiceFile" fileName="${LOG_PATH}/WebService.log"
+                     filePattern="${LOG_PATH}/WebService-%i.log.gz">
+           	<PatternLayout pattern="${LOG_PATTERN}"/>
+            <SizeBasedTriggeringPolicy size="1MB"/>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+        <Async name="AsyncWebServiceFile">
+            <AppenderRef ref="WebServiceFile"/>
+        </Async>
+
+        <!-- Console Appender for fallback -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss} %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <!-- Your application logs -->
+        <Logger name="in.co.mark" level="debug" additivity="false">
+            <AppenderRef ref="AsyncAppFile"/>
+        </Logger>
+
+        <!-- Spring (WebService) framework logs -->
+        <Logger name="org.springframework" level="info" additivity="false">
+            <AppenderRef ref="AsyncWebServiceFile"/>
+        </Logger>
+
+        <!-- Root logger fallback -->
+        <Root level="warn">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
