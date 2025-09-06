@@ -35,7 +35,7 @@ public class UserCredentialDBAdapterImpl implements UserCredentialDBAdapter {
 
 	@Override
 	public void UpdateUserPassword(long id, String newPassword) {
-		userCredRepo.updateLoginPassword(id, newPassword);
+		// userCredRepo.updateLoginPassword(id, newPassword);
 	}
 
 	@Override

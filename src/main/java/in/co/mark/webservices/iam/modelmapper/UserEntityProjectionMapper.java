@@ -20,7 +20,7 @@ public class UserEntityProjectionMapper implements ModelEntityProjectionMapper<U
 	public UserEObj mapModelToEntity(User model) {
 		UserEObj entity = new UserEObj(model.getId(), model.getEmail(), model.getInitial(), model.getFirstName(),
 				model.getMiddleName(), model.getLastName(), model.getDisplayName(), model.getGender(),
-				model.getDobDate(), model.getDobMonth(), model.getDobYear(), model.getAvatarUri(), null);
+				model.getDobDate(), model.getDobMonth(), model.getDobYear(), model.getAvatarUri(), null, null);
 		entity.updateTimestamp(model);
 		return entity;
 	}

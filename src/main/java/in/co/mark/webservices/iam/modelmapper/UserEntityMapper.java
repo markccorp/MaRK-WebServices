@@ -26,7 +26,7 @@ public class UserEntityMapper implements ModelEntityMapper<User, UserEObj> {
 		UserEObj entity = new UserEObj(user.getId(), user.getEmail(), user.getInitial(), user.getFirstName(),
 				user.getMiddleName(), user.getLastName(), user.getDisplayName(),
 				UserUtil.SanitizeGenderValue(user.getGender()), user.getDobDate(), user.getDobMonth(),
-				user.getDobYear(), user.getAvatarUri(), null);
+				user.getDobYear(), user.getAvatarUri(), null, null);
 		entity.updateTimestamp(user);
 		return entity;
 	}

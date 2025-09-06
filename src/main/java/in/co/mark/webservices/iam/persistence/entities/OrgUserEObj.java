@@ -6,6 +6,10 @@ import in.co.mark.webservices.iam.util.OrgUserStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +22,8 @@ import lombok.Setter;
  */
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "org_users")
+@Entity
+@Table(name = "org_users")
 public class OrgUserEObj extends EntityBase {
 	@Getter
 	@Setter
@@ -34,6 +39,20 @@ public class OrgUserEObj extends EntityBase {
 	@Setter
 	@Column(name = "org_user_status")
 	private OrgUserStatus orgUserStatus;
+
+	@Getter
+	@Setter
+	@ManyToOne // (fetch = FetchType.LAZY)
+	@MapsId("userId") // maps this part of the composite key
+	@JoinColumn(name = "user_id")
+	private UserEObj user;
+
+	@Getter
+	@Setter
+	@ManyToOne // (fetch = FetchType.LAZY)
+	@MapsId("orgId") // maps this part of the composite key
+	@JoinColumn(name = "org_id")
+	private OrganizationEObj organization;
 
 	/**
 	 * To get the Org ID of this Org-user mapping

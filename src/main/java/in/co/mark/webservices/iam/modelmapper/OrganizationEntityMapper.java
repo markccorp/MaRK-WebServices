@@ -23,7 +23,7 @@ public class OrganizationEntityMapper implements ModelEntityMapper<Organization,
 	@Override
 	public OrganizationEObj mapToEntity(Organization model) {
 		OrganizationEObj entity = new OrganizationEObj(model.getId(), model.getSuperAdminId(), model.getOrgName(),
-				model.getDesc(), model.getParentOrgId(), model.getStatus());
+				model.getDesc(), model.getParentOrgId(), model.getStatus(), null);
 		entity.updateTimestamp(model);
 		return entity;
 	}

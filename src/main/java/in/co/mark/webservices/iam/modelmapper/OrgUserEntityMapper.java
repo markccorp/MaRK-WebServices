@@ -24,8 +24,8 @@ public class OrgUserEntityMapper implements ModelEntityMapper<OrgUser, OrgUserEO
 
 	@Override
 	public OrgUserEObj mapToEntity(OrgUser model) {
-		OrgUserEObj entity = new OrgUserEObj(new OrgUserIdentifier(model.getOrgId(), model.getUserId()), model.getOrgUserRole(),
-				model.getOrgUserStatus());
+		OrgUserEObj entity = new OrgUserEObj(new OrgUserIdentifier(model.getOrgId(), model.getUserId()),
+				model.getOrgUserRole(), model.getOrgUserStatus(), null, null);
 		entity.updateTimestamp(model);
 		return entity;
 	}
