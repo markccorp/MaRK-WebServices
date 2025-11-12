@@ -3,6 +3,9 @@ package in.co.mark.webservices.iam.persistence.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
@@ -11,7 +14,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * {@code Embeddable} identifier class for Org-User mapping
+ * {@code Embeddable} <i>identifier</i> for mapping between {@link UserEObj} and
+ * {@link OrganizationEObj}.
  * 
  * @author Rakesh Kumar
  */
@@ -51,5 +55,13 @@ public class OrgUserIdentifier implements Serializable {
 		}
 
 		return true;
+	}
+
+	public String toJson() {
+		try {
+			return new ObjectMapper().writeValueAsString(this);
+		} catch (JsonProcessingException e) {
+			return "";
+		}
 	}
 }

@@ -7,11 +7,5 @@ import in.co.mark.webservices.iam.persistence.entities.UserCredentialEObj;
 
 @Repository
 public interface UserCredentialsRepository extends JpaRepository<UserCredentialEObj, Long> {
-	UserCredentialEObj findByUsername(String username);
 
-	// @Modifying
-	// @Query("UPDATE user_credentials uc SET uc.password = :password WHERE uc.id =
-	// :id")
-	// void updateLoginPassword(@Param(value = "id") long id, @Param(value =
-	// "password") String password);
 }

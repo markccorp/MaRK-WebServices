@@ -15,16 +15,16 @@ public class UserEntityMapper implements ModelEntityMapper<User, UserEObj> {
 
 	@Override
 	public User mapToModel(UserEObj userEObj) {
-		return new User(userEObj.getId(), userEObj.getEmail(), null, userEObj.getInitial(), userEObj.getFirstName(),
-				userEObj.getMiddleName(), userEObj.getLastName(), userEObj.getDisplayName(),
+		return new User(userEObj.getId(), userEObj.getUsername(), userEObj.getEmail(), userEObj.getInitial(),
+				userEObj.getFirstName(), userEObj.getMiddleName(), userEObj.getLastName(), userEObj.getDisplayName(),
 				UserUtil.SanitizeGenderValue(userEObj.getGender()), userEObj.getDobDate(), userEObj.getDobMonth(),
 				userEObj.getDobYear(), userEObj.getAvatarUri(), userEObj.getCreatedOn(), userEObj.getLastUpdatedOn());
 	}
 
 	@Override
 	public UserEObj mapToEntity(User user) {
-		UserEObj entity = new UserEObj(user.getId(), user.getEmail(), user.getInitial(), user.getFirstName(),
-				user.getMiddleName(), user.getLastName(), user.getDisplayName(),
+		UserEObj entity = new UserEObj(user.getId(), user.getUsername(), user.getEmail(), user.getInitial(),
+				user.getFirstName(), user.getMiddleName(), user.getLastName(), user.getDisplayName(),
 				UserUtil.SanitizeGenderValue(user.getGender()), user.getDobDate(), user.getDobMonth(),
 				user.getDobYear(), user.getAvatarUri(), null, null);
 		entity.updateTimestamp(user);

@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import in.co.mark.common.exceptions.ResourceNotFoundException;
 import in.co.mark.common.persistence.RecordsPage;
 import in.co.mark.webservices.iam.domain.model.OrgUser;
 import in.co.mark.webservices.iam.gateway.dto.OrgUserRequestDTO;
-import in.co.mark.webservices.iam.gateway.dto.OrgUserResponseDTO;
+import in.co.mark.webservices.iam.modelmapper.OrgUserDTOMapper;
 import in.co.mark.webservices.iam.services.OrgUsersService;
 
 /**
@@ -26,35 +27,36 @@ import in.co.mark.webservices.iam.services.OrgUsersService;
 public class OrgUsersAPIController {
 	private static final Logger logger = LoggerFactory.getLogger(OrgUsersAPIController.class);
 
-	private OrgUsersService orgUserService;
+	private final OrgUsersService orgUserService;
+	private final OrgUserDTOMapper orgUserDTOMapper;
 
-	public OrgUsersAPIController(OrgUsersService orgUserService) {
+	public OrgUsersAPIController(OrgUsersService orgUserService, OrgUserDTOMapper orgUserDTOMapper) {
 		this.orgUserService = orgUserService;
+		this.orgUserDTOMapper = orgUserDTOMapper;
 	}
 
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public OrgUserResponseDTO addUser(@PathVariable("id") long orgId, @RequestBody OrgUserRequestDTO request)
-			throws Exception {
+	public OrgUser addUser(@PathVariable("id") long orgId, @RequestBody OrgUserRequestDTO request) {
 		if (orgId <= 0) {
-			throw new Exception("Invalid OrgId for adding Org-user");
-		}
-		if (request.getOrgId() <= 0) {
-			request.setOrgId(orgId);
-		} else if (request.getOrgId() != orgId) {
-			throw new Exception("Invalid OrgId specified for adding user");
+			throw new ResourceNotFoundException("Invalid OrgId");
 		}
 
-		OrgUserResponseDTO response = orgUserService.createOrgUser(request);
-		logger.info("Org-user with OrgId: {}, UserId: {} created successfully", response.getOrgId(),
-				response.getUserId());
-		return response;
+		OrgUser orgUser = orgUserDTOMapper.mapToOrgUser(orgId, request.getUserId(), request);
+		try {
+			orgUser = orgUserService.addOrgUser(orgId, orgUser);
+			return orgUser;
+		} catch (Exception e) {
+			logger.info("Error in adding user {} to Org {}: {}", orgUser.getUserId(), orgUser.getOrgId(), e);
+			return null;
+		}
 	}
 
 	@GetMapping()
-	public RecordsPage<OrgUser> getOrgUsers(@RequestParam(defaultValue = "0") Integer pageNo,
-			@RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "1") Integer sortOrder,
+	public RecordsPage<OrgUser> getOrgUsers(@PathVariable("id") long orgId,
+			@RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "10") Integer pageSize,
+			@RequestParam(defaultValue = "1") Integer sortOrder,
 			@RequestParam(defaultValue = "displayName") String sortBy) {
-		return orgUserService.getOrgUsers(pageNo, pageSize);
+		return orgUserService.getOrgUsers(orgId, pageNo, pageSize, sortOrder, sortBy);
 	}
 }

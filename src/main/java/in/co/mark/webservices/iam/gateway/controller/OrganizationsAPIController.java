@@ -1,5 +1,7 @@
 package in.co.mark.webservices.iam.gateway.controller;
 
+import java.security.InvalidParameterException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -21,7 +23,7 @@ import in.co.mark.webservices.iam.services.OrganizationsService;
 public class OrganizationsAPIController {
 	private static final Logger logger = LoggerFactory.getLogger(OrganizationsAPIController.class);
 
-	private OrganizationsService orgService;
+	private final OrganizationsService orgService;
 
 	public OrganizationsAPIController(OrganizationsService orgService) {
 		this.orgService = orgService;
@@ -32,9 +34,12 @@ public class OrganizationsAPIController {
 	public Organization createOrganization(@RequestBody Organization request) {
 		// TODO: Set the current user as SuperAdmin of the Org being created.
 		// For now, use the one provided in the request object.
-		Organization org = orgService.createOrganization(request);
-		logger.info("Organization created successfully with ID: {}, SuperAdmin: {}", org.getId(),
-				org.getSuperAdminId());
+		Organization org = null;
+		try {
+			org = orgService.createOrganization(request);
+		} catch (InvalidParameterException e) {
+			logger.error("Error occurred while creating organization: {}", e.getMessage());
+		}
 		return org;
 	}
 

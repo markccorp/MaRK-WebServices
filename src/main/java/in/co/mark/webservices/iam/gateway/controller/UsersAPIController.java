@@ -1,7 +1,5 @@
 package in.co.mark.webservices.iam.gateway.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -26,8 +24,8 @@ import in.co.mark.webservices.iam.services.UsersService;
 public class UsersAPIController {
 	private static final Logger logger = LoggerFactory.getLogger(UsersAPIController.class);
 
-	private UsersService usersService;
-	private UserDTOMapper userDTOMapper;
+	private final UsersService usersService;
+	private final UserDTOMapper userDTOMapper;
 
 	public UsersAPIController(UsersService usersService, UserDTOMapper userDTOMapper) {
 		this.usersService = usersService;
@@ -37,32 +35,26 @@ public class UsersAPIController {
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public UserResponseDTO createUser(@RequestBody UserRequestDTO request) {
-		User user = usersService.createUser(request, true);
-		logger.info("User created successfully with ID: {}", user.getId());
+		User user = userDTOMapper.mapToUser(request);
+		String password = request.getPassword();
+		user = usersService.createUser(user, password);
 		return userDTOMapper.mapToUserResponseDTO(user);
+	}
+
+	@GetMapping()
+	public RecordsPage<User> getUsers(@RequestParam(defaultValue = "0") Integer pageNo,
+			@RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "1") Integer sortOrder,
+			@RequestParam(defaultValue = "displayName") String sortBy) {
+		return usersService.getUsersSummary(pageNo, pageSize, sortOrder, sortBy);
 	}
 
 	@GetMapping(value = "/{id}")
 	public User getUserById(@PathVariable long id) {
-		User user = usersService.getUserById(id);
+		User user = usersService.getUserSummaryById(id);
 		if (user == null) {
 			logger.info("No user found with ID: {}", id);
 		}
 
 		return user;
-	}
-
-	// @GetMapping()
-	public RecordsPage<User> getUsers(@RequestParam(defaultValue = "0") Integer pageNo,
-			@RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "1") Integer sortOrder,
-			@RequestParam(defaultValue = "displayName") String sortBy) {
-		return usersService.getUsers(pageNo, pageSize, sortOrder, sortBy);
-	}
-
-	@GetMapping()
-	public List<User> getAllUsers(@RequestParam(defaultValue = "0") Integer pageNo,
-			@RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "1") Integer sortOrder,
-			@RequestParam(defaultValue = "displayName") String sortBy) {
-		return usersService.getAllUsers(pageNo, pageSize, sortOrder, sortBy);
 	}
 }

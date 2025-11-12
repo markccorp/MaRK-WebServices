@@ -1,6 +1,6 @@
 package in.co.mark.webservices.iam.gateway.dto;
 
-import in.co.mark.webservices.iam.domain.model.OrgUserRole;
+import in.co.mark.webservices.iam.util.OrgUserRole;
 import in.co.mark.webservices.iam.util.OrgUserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,4 +27,14 @@ public class OrgUserResponseDTO extends UserResponseDTO {
 	@Getter
 	@Setter
 	private OrgUserStatus orgUserStatus;
+
+	/** A timestamp indicating when the org-user record was created in DB */
+	@Getter
+	@Setter
+	private long orgUserCreatedOn;
+
+	/** A timestamp indicating when the org-user record was last updated in DB */
+	@Getter
+	@Setter
+	private long orgUserLastUpdatedOn;
 }

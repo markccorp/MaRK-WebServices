@@ -1,41 +1,27 @@
 package in.co.mark.webservices.iam.persistence.repositories;
 
-import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import in.co.mark.webservices.iam.persistence.entities.UserEObj;
-import in.co.mark.webservices.iam.persistence.entities.projections.UserBasicProjection;
-import in.co.mark.webservices.iam.persistence.entities.projections.UserProjection;
+import in.co.mark.webservices.iam.persistence.entities.projections.UserSummary;
 
 @Repository
 public interface UsersRepository extends JpaRepository<UserEObj, Long> {
-	UserEObj findByEmail(String email);
+	@Query("SELECT u.id AS id, u.username AS username, u.email AS email, u.firstName AS firstName, u.lastName AS lastName"
+			+ ", u.displayName AS displayname, u.avatarUri AS avatarUri FROM UserEObj u WHERE u.id = ?1")
+	Optional<UserSummary> getUserSummaryById(long id);
 
-	// @Query("SELECT u.id AS id, uc.username AS username, u.email AS email,
-	// u.initial AS initial, u.firstName AS firstName, u.middleName AS middleName,
-	// u.lastName AS lastName, u.displayName AS displayName, u.gender AS gender,
-	// u.dobDate AS dobDate, u.dobMonth AS dobMonth, u.dobYear AS dobYear,
-	// u.avatarUri AS avatarUri, u.createdOn AS createdOn, u.lastUpdatedOn AS
-	// lastUpdatedOn FROM users u LEFT JOIN user_credentials uc ON u.id = uc.id")
-	@Query("SELECT u.id AS id, uc.username AS username, u.email AS email, "
-			+ "u.firstName AS firstName, u.lastName AS lastName, "
-			+ "u.displayName AS displayName, u.gender AS gender, "
-			+ "u.dobDate AS dobDate, u.dobMonth AS dobMonth, u.dobYear AS dobYear, "
-			+ "u.createdOn AS createdOn, u.lastUpdatedOn AS lastUpdatedOn "
-			+ "FROM UserEObj u LEFT JOIN u.userCredEObj uc")
-	List<UserProjection> findAllUsers();
+	@Query("SELECT u.id AS id, u.username AS username, u.email AS email, u.firstName AS firstName, u.lastName AS lastName"
+			+ ", u.displayName AS displayname, u.avatarUri AS avatarUri FROM UserEObj u WHERE u.email = ?1")
+	Optional<UserSummary> getUserSummaryByEmail(String email);
 
-	// @Query("SELECT u.id AS id, uc.username AS username, u.email AS email,
-	// u.initial AS initial, u.firstName AS firstName, u.middleName AS middleName,
-	// u.lastName AS lastName, u.displayName AS displayName, u.createdOn AS
-	// createdOn, u.lastUpdatedOn AS lastUpdatedOn FROM users u LEFT JOIN
-	// user_credentials uc ON u.id = uc.id")
-	@Query("SELECT u.id AS id, uc.username AS username, u.email AS email, "
-			+ "u.firstName AS firstName, u.lastName AS lastName, "
-			+ "u.displayName AS displayName, u.createdOn AS createdOn, " + "u.lastUpdatedOn AS lastUpdatedOn "
-			+ "FROM UserEObj u LEFT JOIN u.userCredEObj uc")
-	List<UserBasicProjection> findAllUsersBasicInfo();
+	@Query("SELECT u.id AS id, u.username AS username, u.email AS email, u.firstName AS firstName, u.lastName AS lastName"
+			+ ", u.displayName AS displayname, u.avatarUri AS avatarUri FROM UserEObj u")
+	Page<UserSummary> getUsersSummary(Pageable pageable);
 }

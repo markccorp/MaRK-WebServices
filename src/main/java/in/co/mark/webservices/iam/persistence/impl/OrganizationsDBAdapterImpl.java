@@ -15,38 +15,35 @@ import in.co.mark.webservices.iam.persistence.entities.OrganizationEObj;
 import in.co.mark.webservices.iam.persistence.repositories.OrganizationsRepository;
 
 @Component
-public class IAMDBAdapter implements OrganizationsDBAdapter {
-	private final OrganizationsRepository orgRepo;
+public class OrganizationsDBAdapterImpl implements OrganizationsDBAdapter {
+	private final OrganizationsRepository orgsRepo;
 
-	public IAMDBAdapter(OrganizationsRepository orgRepo) {
-		this.orgRepo = orgRepo;
+	public OrganizationsDBAdapterImpl(OrganizationsRepository orgRepo) {
+		this.orgsRepo = orgRepo;
+	}
+
+	@Override
+	public boolean existsById(long id) {
+		return orgsRepo.existsById(id);
 	}
 
 	@Override
 	public OrganizationEObj createOrganization(OrganizationEObj orgEObj) {
-		return orgRepo.save(orgEObj);
+		return orgsRepo.save(orgEObj);
 	}
 
 	@Override
 	public OrganizationEObj getOrganizationById(long id) {
-		Optional<OrganizationEObj> optionalOrgEObj = orgRepo.findById(id);
+		Optional<OrganizationEObj> optionalOrgEObj = orgsRepo.getOrganizationById(id);
 		return optionalOrgEObj.orElse(null);
-	}
-
-	@Override
-	public RecordsPage<OrganizationEObj> getOrganizations(int pageNo, int pageSize) {
-		Pageable paging = PageRequest.of(pageNo, pageSize);
-		Slice<OrganizationEObj> slicedResult = orgRepo.findAll(paging);
-		return new RecordsPageImpl<OrganizationEObj>(slicedResult.getContent(), slicedResult.getNumber(),
-				slicedResult.getSize(), slicedResult.hasNext());
 	}
 
 	@Override
 	public RecordsPage<OrganizationEObj> getOrganizations(int pageNo, int pageSize, int sortOrder,
 			String... sortByProperties) {
 		Direction sortDirection = sortOrder != 0 ? Direction.ASC : Direction.DESC;
-		Pageable paging = PageRequest.of(pageNo, pageSize, sortDirection, sortByProperties);
-		Slice<OrganizationEObj> slicedResult = orgRepo.findAll(paging);
+		Pageable pageable = PageRequest.of(pageNo, pageSize, sortDirection, sortByProperties);
+		Slice<OrganizationEObj> slicedResult = orgsRepo.findAll(pageable);
 		return new RecordsPageImpl<OrganizationEObj>(slicedResult.getContent(), slicedResult.getNumber(),
 				slicedResult.getSize(), slicedResult.hasNext());
 	}

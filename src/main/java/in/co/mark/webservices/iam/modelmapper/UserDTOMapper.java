@@ -9,13 +9,13 @@ import in.co.mark.webservices.iam.gateway.dto.UserResponseDTO;
 @Component
 public class UserDTOMapper {
 	/**
-	 * To map the given {@code reqDto} to an equivalent {@link User} model object
+	 * To map a given {@code reqDto} to an equivalent {@link User} object.
 	 * 
 	 * @param reqDto A request DTO of type {@link CreateUserRequest}
-	 * @return A {@link User} model object
+	 * @return A {@link User} object
 	 */
 	public User mapToUser(UserRequestDTO reqDto) {
-		User user = new User(reqDto.getEmail(), reqDto.getUsername(), reqDto.getInitial(), reqDto.getFirstName(),
+		User user = new User(reqDto.getUsername(), reqDto.getEmail(), reqDto.getInitial(), reqDto.getFirstName(),
 				reqDto.getMiddleName(), reqDto.getLastName(), reqDto.getDisplayName(), reqDto.getGender(),
 				reqDto.getDobDate(), reqDto.getDobMonth(), reqDto.getDobYear(), null);
 		if (reqDto.getUserId() > 0) {
@@ -26,7 +26,7 @@ public class UserDTOMapper {
 	}
 
 	/**
-	 * To map the given {@code user} to an equivalent {@link UserResponseDTO} object
+	 * To map a given {@code user} to an equivalent {@link UserResponseDTO} object.
 	 * 
 	 * @param user A model object of type {@link User}
 	 * @return A {@link UserResponseDTO} object
